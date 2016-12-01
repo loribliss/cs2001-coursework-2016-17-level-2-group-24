@@ -1,0 +1,7 @@
+1: Go onto github and click on the clone or download icon and copy the link it gives you.
+2: Make sure you have GitHub dowloaded on to your desktop(https://desktop.github.com/)
+3: Open the command line that came with it should be Git Shell and write "git cd and the directory where you want it stored"(e.g cd C:\Users\Frankie\AndroidStudioProjects)
+4: Then write "git clone and the link from earlier"
+5: Write " git add * " when you have done some code
+6: Then " git commit " and write what you have done
+7: Type " git push
