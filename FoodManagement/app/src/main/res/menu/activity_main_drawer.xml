@@ -5,7 +5,7 @@
         <item
             android:id="@+id/cupboard"
             android:icon="@drawable/ic_restaurant_menu_black_24dp"
-            android:title="Cupboard" />
+            android:title="Food Cupboard" />
         <item
             android:id="@+id/find_food"
             android:icon="@drawable/ic_place"
