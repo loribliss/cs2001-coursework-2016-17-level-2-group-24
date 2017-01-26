@@ -3,6 +3,7 @@
     package="com.example.cs15fmk.foodmanagement">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,9 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:parentActivityName="com.example.cs15fmk.foodmanagement.MainActivity"
             android:name=".MainActivity"
             android:label="Food Management"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,8 +28,12 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".ContentActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".ContentActivity" />
+        <activity
+            android:name=".SignUpActivity"
+            android:label="@string/title_activity_sign_up"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

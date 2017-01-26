@@ -15,15 +15,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import layout.FindFoodFragment;
 import layout.FoodCupboardFragment;
+import layout.Main_menu;
 import layout.RecipesFragment;
 import layout.ShoppingListFragment;
 
+import static android.R.attr.fragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+public class MainActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,25 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-/*
-        ImageView cupboardButton = (ImageView) findViewById(R.id.cupboard_main);
-        cupboardButton.setOnClickListener(this);
-        ImageView findFoodButotn = (ImageView) findViewById(R.id.find_food);
-        findFoodButotn.setOnClickListener(this);
-        ImageView shoppingListButton = (ImageView) findViewById(R.id.shopping_list);
-        shoppingListButton.setOnClickListener(this);
-        ImageView recipesButton = (ImageView) findViewById(R.id.recipes);
-        recipesButton.setOnClickListener(this);*/
 
-//bottom right button on - need to change
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -95,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
@@ -136,41 +122,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-   /* public void displayView(int ViewID) {
-        String title = getString(R.string.app_name);
-        Fragment fragment = null;
-        switch (ViewID) {
-            case R.id.cupboard:
-                fragment = new FoodCupboardFragment();
-                title = "Food Cupboard";
-                break;
-            case R.id.find_food:
-                fragment = new FindFoodFragment();
-                title = "Find Food";
-                break;
-            case R.id.recipes:
-                fragment = new RecipesFragment();
-                title = "Recipes";
-                break;
-            case R.id.shopping_list:
-                fragment = new ShoppingListFragment();
-                title = "Shoppping List";
-                break;
-        }
-
-        if (fragment != null) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.content_main, fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }
-        //set title
-        getSupportActionBar().setTitle(title);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-    }*/
-
 
     public void onClickSignIn(View v) {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -179,48 +130,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    public void onClickSignUp(View v) {
+        Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+        {
+            MainActivity.this.startActivity(intent);
+        }
+    }
+
     public void onClick(View v) {
-         //doesnt work currently
+        Fragment fragment = null;
+        //NOT A CLUE HOW TO LINK IT TO THE PAGES
         switch (v.getId()) {
-            case R.id.cupboard:
+            case R.id.cupboard_main:
                 Toast.makeText(MainActivity.this,
-                        "CUPBOARD PAGE", Toast.LENGTH_SHORT).show();
+                        "Cupboard page", Toast.LENGTH_SHORT).show();
+                fragment = new FoodCupboardFragment();
                 break;
-            case R.id.find_food:
+            case R.id.find_food_main:
                 Toast.makeText(MainActivity.this,
                         "FIND FOOD PAGE", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.recipes:
+            case R.id.recipes_main:
                 Toast.makeText(MainActivity.this,
                         "RECIPES PAGE", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.shopping_list:
+            case R.id.shopping_list_main:
                 Toast.makeText(MainActivity.this,
                         "SHOPPING LIST PAGE", Toast.LENGTH_SHORT).show();
                 break;
         }
-       /* Fragment fragment = null;
-        switch (v.getId()) {
-            case R.id.cupboard:
-                displayView();
-                break;
-            case R.id.find_food:
-                fragment = new FindFoodFragment();
-                break;
-            case R.id.recipes:
-                fragment = new RecipesFragment();
-                break;
-            case R.id.shopping_list:
-                fragment = new ShoppingListFragment();
-                break;
-        }
-        if (fragment != null) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.content_main, fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-
-        }*/
     }
 
 

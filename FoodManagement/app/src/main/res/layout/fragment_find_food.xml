@@ -1,13 +1,18 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="layout.FindFoodFragment"
-    >
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context="layout.FindFoodFragment">
 
-    <com.google.android.gms.maps.MapView android:id="@+id/map"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-       />
+    <include
+        layout="@layout/map_slide_up_panel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
 </RelativeLayout>
