@@ -4,10 +4,10 @@ package layout;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cs15fmk.foodmanagement.R;
@@ -27,10 +28,13 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
+import com.google.android.gms.location.LocationSettingsStates;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.location.places.PlaceLikelihood;
 import com.google.android.gms.location.places.PlaceLikelihoodBuffer;
 import com.google.android.gms.location.places.Places;
@@ -46,31 +50,32 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import static android.R.attr.id;
-import static android.R.attr.name;
-import static android.os.Build.VERSION_CODES.N;
+import java.util.ArrayList;
+
+import static com.example.cs15fmk.foodmanagement.R.id.navigation;
 
 public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
-
-    MapView mMapView;
-    private GoogleMap mGoogleMap;
-    private GoogleApiClient mGoogleApiClient;
     public static final int REQUEST_LOCATION = 0;
+    private static final String TAG = "MyActivity";
+    TextView asd;
+    MapView mMapView;
     LatLng mLatLng;
     Activity mActivity;
-    private Context mContext;
     CameraUpdate cameraUpdate;
     LocationRequest mLocationRequest;
-    private static final String TAG = "MyActivity";
+    Marker marker;
     CharSequence mShopName;
     CharSequence mShopAddress;
     int mShopPriceLevel;
-    float mRating;
+    float mShopRating;
+    ArrayList<Integer> filter = new ArrayList<>();
     String LatLng;
-
+    private GoogleMap mGoogleMap;
+    private GoogleApiClient mGoogleApiClient;
+    private Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -81,14 +86,15 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
         mMapView.getMapAsync(this);
-        //NEED TO ADD LCOATION SETTING - https://developer.android.com/training/location/index.html
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ImageView imageView = (ImageView) v.findViewById(R.id.navigation);
+       /* Listen for click for google map intent*/
+        ImageView imageView = (ImageView) v.findViewById(navigation);
         imageView.setOnClickListener(this);
+        /* Listen for click for Floating action button*/
         FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.FabCurrentLocation);
         fab.setOnClickListener(this);
         return v;
@@ -103,7 +109,7 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
     }
 
     protected synchronized void buildGoogleApiClient() {
-//connect to google play service to use API's
+        /*connects to google play service to use API's*/
         mGoogleApiClient = new GoogleApiClient.Builder(mActivity)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -130,18 +136,62 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
             buildGoogleApiClient();
 
         }
+
+
+        locationSetting();
+    }
+
+    protected void createLocationRequest() {
+        LocationRequest mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+    public void locationSetting() {
+        final int REQUEST_CHECK_SETTINGS = 0;
+        createLocationRequest();
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(mLocationRequest);
         PendingResult<LocationSettingsResult> result =
                 LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient,
                         builder.build());
+        result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
+            @Override
+            public void onResult(LocationSettingsResult result) {
+                final Status status = result.getStatus();
+                final LocationSettingsStates locationSettingsStates = result.getLocationSettingsStates();
+                switch (status.getStatusCode()) {
+                    case LocationSettingsStatusCodes.SUCCESS:
+                        // All location settings are satisfied. The client can
+                        // initialize location requests here.
+
+                        break;
+                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                        // Location settings are not satisfied, but this can be fixed
+                        // by showing the user a dialog.
+                        try {
+                            // Show the dialog by calling startResolutionForResult(),
+                            // and check the result in onActivityResult().
+                            status.startResolutionForResult(
+                                    mActivity,
+                                    REQUEST_CHECK_SETTINGS);
+                        } catch (IntentSender.SendIntentException e) {
+                            // Ignore the error.
+                        }
+                        break;
+
+                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                        break;
+                }
+
+            }
+        });
     }
 
     @Override
     public void onConnected(Bundle connectionHint) {
-        /*if (mLocationRequest) {
-            startLocationUpdates();
-        }*/
+
         if (ContextCompat.checkSelfPermission(mContext,
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -274,9 +324,11 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
 
     public void onClick(View v) {
         if (v.getId() == R.id.FabCurrentLocation) {
-            mGoogleMap.addMarker(new MarkerOptions().position(mLatLng));
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mLatLng, 18);
-            mGoogleMap.addMarker(new MarkerOptions().position(mLatLng));
+            //does NOT WORK
+            if (marker == null) {
+                marker = mGoogleMap.addMarker(new MarkerOptions().position(mLatLng));
+            }
             mGoogleMap.animateCamera(cameraUpdate);
             Toast.makeText(mContext, "Getting Current Location", Toast.LENGTH_SHORT).show();
             //draws circle
@@ -284,32 +336,72 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
                     .center(mLatLng)
                     .radius(50)
                     .strokeColor(Color.BLACK));
-        } else if (v.getId() == R.id.navigation) {
+        } else if (v.getId() == navigation) {
             onClickMap(v);
+        }
+        if (ContextCompat.checkSelfPermission(mContext,
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            placeLikelihoodBuffer(v);
         }
 
     }
 
-    public void placeLikelihoodBuffer(View v) {
+    public void placeLikelihoodBuffer(final View v) {
+
         Log.d(TAG, "Calling onPlaceLikelihood");
         checkPermission();
         if (mGoogleApiClient != null) {
+            Log.d(TAG, "GETTING NEARBY ");
             PendingResult<PlaceLikelihoodBuffer> result = Places.PlaceDetectionApi
                     .getCurrentPlace(mGoogleApiClient, null);
             result.setResultCallback(new ResultCallback<PlaceLikelihoodBuffer>() {
                 @Override
                 public void onResult(PlaceLikelihoodBuffer likelyPlaces) {
                     for (PlaceLikelihood placeLikelihood : likelyPlaces) {
+                        //for(int i=0;i<filter.size();i++){
                         Log.i(TAG, String.format("Place '%s' has likelihood: %g",
                                 placeLikelihood.getPlace().getName(),
                                 placeLikelihood.getLikelihood()));
+
+                        //   }
+                        final CharSequence mShopName = likelyPlaces.get(1).getPlace().getName();
+                        final CharSequence mShopAddress = likelyPlaces.get(1).getPlace().getAddress();
+                        final int mShopPriceLevel = likelyPlaces.get(1).getPlace().getPriceLevel();
+                        final float mShopRating = likelyPlaces.get(1).getPlace().getRating();
+                        mLatLng = likelyPlaces.get(1).getPlace().getLatLng();
                     }
+                    //for(int i=0;i<10;i++) {
+
+
+                    Log.d(TAG, "dasdasd " + mShopName);
+                    Log.d(TAG, "dasdasd " + mShopAddress);
+                    Log.d(TAG, "dasdasd " + mShopPriceLevel);
+                    Log.d(TAG, "dasdasd " + mShopRating);
+                    apple(mShopName, mShopAddress, mShopRating, mShopPriceLevel);
+                    // }
+
                     likelyPlaces.release();
                 }
+
             });
         }
 
     }
+
+    public void apple(CharSequence mShopName, CharSequence mShopAddress, Float mShopRating, int mShopPrice) {
+
+        asd = (TextView) getView().findViewById(R.id.shopName);
+        asd.setText(mShopName);
+        asd = (TextView) getView().findViewById(R.id.shopAddress);
+        asd.setText(mShopAddress);
+        asd = (TextView) getView().findViewById(R.id.shopRating);
+        asd.setText(String.valueOf(mShopRating));
+        /*asd = (TextView) getView().findViewById(R.id.shopPrice);
+        asd.setText(mShopPrice);*/
+
+    }
+
 
     public void onClickMap(View v) {
         Toast.makeText(mContext, "Opening Map", Toast.LENGTH_SHORT).show();
@@ -317,9 +409,9 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
     }
 
     public void googleMapIntent(View v) {
-        ImageView navigation = (ImageView) v.findViewById(R.id.navigation);
-
-        Uri gmmIntentUri = Uri.parse("geo:" + LatLng);
+        mLatLng.toString();
+        Uri gmmIntentUri = Uri.parse("google.navigation:q=" + mLatLng);
+        Log.d(TAG, "you " + mLatLng);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         if (mapIntent.resolveActivity(mActivity.getPackageManager()) != null) {
@@ -329,14 +421,9 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
 
     }
 
-    protected void createLocationRequest() {
-        LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(5000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-    }
 
 }
+
 
 
 
