@@ -1,0 +1,17 @@
+Need to download Putty and make sure you are connected to the VPN if you don't live on campus 
+IP: 134.83.83.25
+Port number: 47224
+User name: l2grp(its L not 1)
+Password: l2grp24
+Type: mysql -u12grp24 -p -h134.83.83.25 - P47000
+Password: l2grp24
+Create database - "create database grp24_student;"
+Show database - "show databases;"
+Select database - "use grp24_student;"
+Create table - "create table student(ID int ,name varchar(20));"
+Show table - "show tables;"
+Alter table - "alter table student modify name varchar(50);"
+Add more fields to table - "alter table student add height int(20);"
+Delete table - "drop table atudent"
+Shows attributes of tables - "describe student; "
+Additional commands can be found here http://www.w3schools.com/SQl/sql_create_table.asp
