@@ -31,7 +31,7 @@ public class ShoppingList extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.shoppinglist);
         listView.setAdapter(adapter);
 
-        FloatingActionButton addNewItem = (FloatingActionButton)findViewById(R.id.add_new_shopping_item);
+        FloatingActionButton addNewItem = (FloatingActionButton) findViewById(R.id.add_new_shopping_item);
         addNewItem.setOnClickListener(new View.OnClickListener()
         {
             @Override

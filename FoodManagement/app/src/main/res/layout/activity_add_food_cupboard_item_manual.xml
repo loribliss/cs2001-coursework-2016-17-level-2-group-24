@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_food_cupboard_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.cs15fmk.foodmanagement.AddFoodCupboardItemManual"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <EditText
+        android:id="@+id/new_FC_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="name"
+        android:inputType="textMultiLine"/>
+    <EditText
+        android:id="@+id/new_FC_dayBought"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Day Bought"
+        android:focusable="false"
+        />
+    <EditText
+        android:id="@+id/new_FC_dayExpiry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Day Expiry"
+        android:inputType="date"/>
+    <EditText
+        android:id="@+id/new_FC_amountBought"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Amount Bought"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/complete_FC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add new item!"/>
+
+</LinearLayout>

@@ -37,10 +37,15 @@
         <activity
             android:name=".ShoppingList"
             android:label="Shopping List" />
+        <activity
+            android:name=".FoodCupboard"
+            android:label="Food Cupboard" />
         <activity android:name=".AddShoppingItem" />
-        <activity android:name=".EditShoppingItem">
-
-        </activity>
+        <activity android:name=".EditShoppingItem" />
+        <activity android:name=".AddNewFCItemMenu" />
+        <activity android:name=".AddFoodCupboardItemManual" />
+        <activity android:name=".ViewFoodCupboardItem" />
+        <activity android:name=".EditFoodCupboardItem"></activity>
     </application>
 
 </manifest>

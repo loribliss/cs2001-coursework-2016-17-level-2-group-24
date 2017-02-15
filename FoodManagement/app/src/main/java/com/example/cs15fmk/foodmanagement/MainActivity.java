@@ -91,8 +91,10 @@ public class MainActivity extends AppCompatActivity implements
         int id = item.getItemId();
         switch (id) {
             case R.id.cupboard:
-                fragment = new FoodCupboardFragment();
-                title = "Food Cupboard";
+                Intent openFoodCupboard = new Intent(MainActivity.this, FoodCupboard.class);
+                startActivity(openFoodCupboard);
+                //fragment = new FoodCupboardFragment();
+                //title = "Food Cupboard";
                 break;
             case R.id.find_food:
                 fragment = new FindFoodFragment();
