@@ -103,8 +103,10 @@ public class MainActivity extends AppCompatActivity implements
                 title = "Recipes";
                 break;
             case R.id.shopping_list:
-                fragment = new ShoppingListFragment();
-                title = "Shoppping List";
+                Intent openShoppingList = new Intent(MainActivity.this, ShoppingList.class);
+                startActivity(openShoppingList);
+                //fragment = new ShoppingListFragment();
+                //title = "Shoppping List";
                 break;
         }
         //changes to different fragment when clicked
