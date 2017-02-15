@@ -27,13 +27,13 @@
         android:layout_weight="0.04" />
 
 
-    <TextClock
+    <SeekBar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:id="@+id/textClock2"
-        android:layout_weight="0.04" />
+        android:layout_weight="0.05" />
 
-    <EditText
+    <SearchView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
@@ -44,14 +44,11 @@
         android:textSize="24sp"
         android:textColor="@android:color/black" />
 
-    <TextClock
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/textClock" />
 
-    <EditText
+
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/editText2"
@@ -69,7 +66,7 @@
         android:textSize="24sp"
         android:textColor="@android:color/black" />
 
-    <AutoCompleteTextView
+    <SearchView
         android:text="Search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
