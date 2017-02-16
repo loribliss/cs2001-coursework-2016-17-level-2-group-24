@@ -15,7 +15,7 @@ import static com.example.cs15fmk.foodmanagement.R.id.btn_signup;
 import static com.example.cs15fmk.foodmanagement.R.id.signOut;
 
 public class SignUpActivity extends AppCompatActivity {
-
+private Mysql mysql = new Mysql();
     EditText editName, editEmail, editPassword;
     ViewSwitcher simpleViewSwitcher;
 
@@ -32,6 +32,8 @@ public class SignUpActivity extends AppCompatActivity {
                 Toast.makeText(SignUpActivity.this,
                         "You have signed up", Toast.LENGTH_SHORT).show();
 /*simpleViewSwitcher.showNext();*/
+                String[] args = {};
+                Mysql.main(args);
             }
         });
     }

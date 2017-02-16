@@ -3,7 +3,7 @@
     package="com.example.cs15fmk.foodmanagement">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -33,7 +33,12 @@
         <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AddShoppingItem" />
+        <activity android:name=".EditShoppingItem" />
+        <activity android:name=".SItemAdapter" />
+        <activity android:name=".ShoppingListItem" />
+        <activity android:name=".RecyclerVIew"></activity>
     </application>
 
 </manifest>

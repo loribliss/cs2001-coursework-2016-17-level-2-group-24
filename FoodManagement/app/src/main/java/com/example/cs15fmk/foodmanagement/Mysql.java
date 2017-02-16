@@ -12,15 +12,15 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static android.provider.Telephony.Carriers.PASSWORD;
 import static java.util.jar.Pack200.Packer.PASS;
 
 /**
  * Created by Frankie on 12/02/2017.
  */
 public class Mysql extends AppCompatActivity{
-    private static final String url = "jdbc:mysql://134.83.1.242:3306/grp24_student";
+    private static final String url = "jdbc:mysql://192.168.0.23:3306/grp24_student";
     private static final String user = "Frankie";
-    private static final String email = "frankie@gmail.com";
     private static final String password = "password";
     private static final String TAG = "MyActivity";
     String apple[] ;
@@ -30,32 +30,50 @@ public class Mysql extends AppCompatActivity{
         setContentView(R.layout.activity_login);
         main(apple);
     }
-    public static void main(String args[]){
+    public static void main(String args[]) {
         System.out.println("Hello");
-        try {
+        testDB();
+    }
+      /*  try {
             Statement stmt;
             ResultSet rs;
 
             //Register the JDBC driver for MySQL
-
             Class.forName("com.mysql.jdbc.Driver");
 
-            String url = "jdbc:mysql://IP:PORT/DBNAME";
+            Log.d(TAG, "Connecting");
+            Connection con = DriverManager.getConnection(url, user, password);
 
-            Connection con = DriverManager.getConnection( url,"USER","PASSWORD");
+            //Statement select = con.createStatement();
 
-            //Get a Statement object
+            *//*rs = select.executeQuery("SELECT ID, name, height FROM student");
+
+            System.out.println("Some results:");
+            while (rs.next()) { // process results one row at a time
+                int key = rs.getInt(1);
+                int field = rs.getInt(2);
+                int amt = rs.getInt(3);
+
+                System.out.println("key = " + key);
+                System.out.println("Amt = " + amt);
+                System.out.println("Field = " + field);*//*
+
+                //Get a Statement object
             stmt = con.createStatement();
 
 
             // Insert a row
-            stmt.executeUpdate( "INSERT INTO account " +
+            stmt.executeUpdate("INSERT INTO account" +
                     "VALUES ('Bob', 'bob@gmail.com', 'bob')");
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
-    }
+            Log.d(TAG, "INSERTING");
+            }
+
+            catch(Exception e){
+                System.out.println(e);
+                Log.d(TAG, "ERROR "+ e);
+            }*/
+
+
 
 
    /* public void apple(){
@@ -86,13 +104,13 @@ public class Mysql extends AppCompatActivity{
 
 
 
-    /*public void testDB(){
+    public static void testDB(){
         Connection conn = null;
         Statement stmt = null;
         try{
-            *//*StrictMode.ThreadPolicy policy =
+            StrictMode.ThreadPolicy policy =
                     new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);*//*
+            StrictMode.setThreadPolicy(policy);
 
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -102,9 +120,9 @@ public class Mysql extends AppCompatActivity{
 
             Log.d(TAG,"Inserting records into the table...");
             stmt = conn.createStatement();
-            String sql = "INSERT INTO account " +
-                    "VALUES ('Bob', 'bob@gmail.com', 'bob')";
-            stmt.executeUpdate(sql);
+            stmt.executeUpdate("INSERT INTO account" +
+                    "VALUES ('Bob', 'bob@gmail.com', 'bob')");
+
             Log.d(TAG,"Inserted records into the table...");
         }catch(SQLException se){
             //Handle errors for JDBC
@@ -129,5 +147,5 @@ public class Mysql extends AppCompatActivity{
         System.out.println("Goodbye!");
 
 
-    }*/
+    }
 }

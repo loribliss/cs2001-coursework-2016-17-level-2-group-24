@@ -88,8 +88,7 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
     private GoogleMap mGoogleMap;
     private GoogleApiClient mGoogleApiClient;
     private Context mContext;
-    Double value;
-
+    double value;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -112,7 +111,7 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
         FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.FabCurrentLocation);
         fab.setOnClickListener(this);
 
-        radius(v);
+        //radius(v);
 
 
         return v;
@@ -225,14 +224,11 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
                         mLastLocation.getLongitude());
                 LatLng = mLastLocation.toString();
             }
-
-
-            LatLng london = new LatLng(51.5074, 0.1278);
+            LatLng london = new LatLng(51.509865, -0.118092);
             cameraUpdate = CameraUpdateFactory.newLatLngZoom(london, 10);
             mGoogleMap.animateCamera(cameraUpdate);
 
         } else {
-            //doesnt have permission checking
             checkPermission();
             onConnected(connectionHint);
         }
@@ -350,7 +346,7 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
         if (v.getId() == R.id.FabCurrentLocation) {
             Log.d(TAG, "Moving camera");
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mLatLng, 18);
-            //does NOT WORK
+
             if (marker == null) {
                 marker = mGoogleMap.addMarker(new MarkerOptions().position(mLatLng));
                 Log.d(TAG, "ADDING MARKER");
@@ -364,12 +360,12 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
             Circle circle = mGoogleMap.addCircle(new CircleOptions()
                     .center(mLatLng)
                     .radius(radius)
-                    .strokeColor(Color.BLACK))
-                    ;
-
-        } else if (v.getId() == navigation) {
-            onClickMap(v);
+                    .strokeColor(Color.BLACK));
+            Log.d(TAG, mLatLng + "ADDD");
         }
+        /*else if (v.getId() == navigation) {
+            onClickMap(v, mLatLng);
+        }*/
         if (ContextCompat.checkSelfPermission(mContext,
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -407,6 +403,7 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
                                 Log.d(TAG, "Shop price legve " + mShopPriceLevel);
                                 Log.d(TAG, "Shop Rating " + mShopRating);
                                 apple(mShopName, mShopAddress, mShopRating, mShopPriceLevel);
+                                onClickMap(v, mLatLng);
                             }
 
                         }
@@ -438,12 +435,12 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
     }
 
 
-    public void onClickMap(View v) {
+    public void onClickMap(View v, LatLng mLatLng) {
         Toast.makeText(mContext, "Opening Map", Toast.LENGTH_SHORT).show();
-        googleMapIntent(v);
+        googleMapIntent(v, mLatLng);
     }
 
-    public void googleMapIntent(View v) {
+    public void googleMapIntent(View v, LatLng mLatLng) {
         mLatLng.toString();
         Uri gmmIntentUri = Uri.parse("google.navigation:q=" + mLatLng);
         Log.d(TAG, "you " + mLatLng);
@@ -465,29 +462,32 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
             @Override
             public void afterTextChanged(Editable s) {
                 // TODO Auto-generated method stub
-
+                if(s.length() ==1) {
+                    Log.d(TAG, "length:  " + s.length());
+                    Log.d(TAG, "length radius :  " + radius.length());
+                    radius.setText(" mile");
+                    String apple;
+                    apple = radius.getText().toString();
+                    String[] part = apple.split("(?=\\d)(?<=\\D)");
+                    Log.d(TAG, "part 0  :  " + part[0]);
+                    //Log.d(TAG, "part 1 :  " + part[1]);
+                    apple.split("(?=\\d)");
+                    //value = Integer.parseInt(apple);
+                    Log.d(TAG, "apple :  " + apple);
+                    Log.d(TAG, "asde :  " + value);
+                }
             }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // TODO Auto-generated method stub
+
             }
 
             @Override
             /*works weirdly* need to be fixed*/
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() ==1 ) {
-                    Log.d(TAG, "length:  " + s.length());
-                     value = Double.parseDouble(radius.getText().toString());
 
-                    radius.setText(value + " m");
-                    /*if (s.length() != 0){
-                        radius.setText( " km");
-                        Log.d(TAG, "IRGH " );
-                    }*/
-                    Log.d(TAG, "problem " + radius.getText().toString());
-
-                }
 
             }
         });
@@ -496,11 +496,13 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 Log.d(TAG, "WAITING");
-                String value = radius.getText().toString();
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode) == KeyEvent.KEYCODE_ENTER) {
-                    Toast.makeText(mContext, value, Toast.LENGTH_LONG).show();
-                   drawCircle();
+                   // Toast.makeText(mContext,"" , Toast.LENGTH_LONG).show();
+
+                    drawCircle();
+                    Log.d(TAG, "problem " + radius.getText().toString());
+                    Log.d(TAG, "problem2 " + value);
                     return true;
 
 
@@ -513,7 +515,7 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
     public void drawCircle(){
         Log.d(TAG, "DRAWING CIRCLE ");
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mLatLng, 18);
-        //does NOT WORK
+
         if (marker == null) {
             marker = mGoogleMap.addMarker(new MarkerOptions().position(mLatLng));
             Log.d(TAG, "ADDING MARKER");
@@ -522,12 +524,14 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
             Log.d(TAG, "REMOVING MARKER");
         }
         mGoogleMap.animateCamera(cameraUpdate);
-        Toast.makeText(mContext, "Getting Current Location", Toast.LENGTH_SHORT).show();
         //draws circle
+        //converts miles into meters
+        value = value * 1609.344;
         Circle circle = mGoogleMap.addCircle(new CircleOptions()
                 .center(mLatLng)
                 .radius(value)
                 .strokeColor(Color.BLUE));
+        Log.d(TAG, mLatLng + "ADDD");
     }
 }
 
