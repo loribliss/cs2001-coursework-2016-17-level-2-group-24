@@ -81,7 +81,6 @@ public class ShoppingList extends AppCompatActivity {
         //intent.putExtra("Current priority", item.getItemPriority());
         //intent.putExtra("Date created", item.getItemDateCreated());
         intent.putExtra("Position", String.valueOf(position));
-
         intent.putExtra("editItem", item); //parceable object with features except boolean checkbox state
         startActivityForResult(intent, 2);
     }
@@ -107,28 +106,36 @@ public class ShoppingList extends AppCompatActivity {
 
         if (requestCode ==2)
         {
+            String position = data.getStringExtra("position");
+            int pos = Integer.valueOf(position);
             if (resultCode == RESULT_OK)
             {
-                ShoppingListItem a = data.getParcelableExtra("completeEditItem");
-                String newName = a.getItemName();
-                String newAmount = a.getItemQuantity();
-                String newPriority = a.getItemPriority();
-                String newDateCreated = a.getItemDateCreated();
+                if (data.getStringExtra("userOption").equals("edit"))
+                {
+                    ShoppingListItem a = data.getParcelableExtra("completeEditItem");
+                    String newName = a.getItemName();
+                    String newAmount = a.getItemQuantity();
+                    String newPriority = a.getItemPriority();
+                    String newDateCreated = a.getItemDateCreated();
 
-                //CONSIDER AN UPDATE METHOD
+                    //CONSIDER AN UPDATE METHOD
+                    //String newName = data.getStringExtra("newName");
+                    //String newAmount = data.getStringExtra("newAmount");
+                    //String newPriority = data.getStringExtra("newPriority");
 
-                //String newName = data.getStringExtra("newName");
-                //String newAmount = data.getStringExtra("newAmount");
-                //String newPriority = data.getStringExtra("newPriority");
-
-                String position = data.getStringExtra("position");
-
-                ShoppingListItem edit = shoppingItems.get(Integer.valueOf(position));
-                edit.setItemName(newName);
-                edit.setItemQuantity(newAmount);
-                edit.setItemPrioirty(newPriority);
-                edit.setItemDateCreated(newDateCreated);
-                adapter.notifyDataSetChanged();
+                    ShoppingListItem edit = shoppingItems.get(pos);
+                    edit.setItemName(newName);
+                    edit.setItemQuantity(newAmount);
+                    edit.setItemPrioirty(newPriority);
+                    edit.setItemDateCreated(newDateCreated);
+                    adapter.notifyDataSetChanged();
+                }
+                else
+                {
+                    Toast.makeText(this, "You have just deleted " + shoppingItems.get(pos).getItemName(), Toast.LENGTH_SHORT).show();
+                    shoppingItems.remove(pos);
+                    adapter.notifyDataSetChanged(); //deletion does not change anything permanently if you exit the screen
+                }
             }
         }
     }

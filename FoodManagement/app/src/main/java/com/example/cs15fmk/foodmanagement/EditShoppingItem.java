@@ -119,6 +119,21 @@ public class EditShoppingItem extends AppCompatActivity {
             }
         });
 
+        Button deleteItem = (Button) findViewById(R.id.deleteShoppingListItem) ;
+        deleteItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent data = new Intent();
+                String position = getIntent().getStringExtra("Position");
+                data.putExtra("position", position);
+                data.putExtra("userOption", "delete");
+                setResult(RESULT_OK, data);
+                finish();
+            }
+        });
+
+
         Button editItem = (Button) findViewById(R.id.completeEditShoppingListItem);
         editItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +155,7 @@ public class EditShoppingItem extends AppCompatActivity {
                     //data.putExtra("newAmount", newAmount);
                     //data.putExtra("newPriority", newPriority);
                     data.putExtra("position", position);
-
+                    data.putExtra("userOption", "edit");
                     setResult(RESULT_OK, data);
                     finish();
                 }
