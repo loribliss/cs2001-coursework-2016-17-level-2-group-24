@@ -10,8 +10,6 @@ import com.example.cs15fmk.foodmanagement.R;
 
 
 public class ShoppingListFragment extends Fragment {
-
-
     public ShoppingListFragment() {
         // Required empty public constructor
     }

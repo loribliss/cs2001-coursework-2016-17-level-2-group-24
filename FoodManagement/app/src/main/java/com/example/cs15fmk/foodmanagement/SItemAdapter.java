@@ -1,6 +1,7 @@
 package com.example.cs15fmk.foodmanagement;
 
 import android.app.Activity;
+import android.media.Image;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,15 +39,29 @@ public class SItemAdapter extends ArrayAdapter<ShoppingListItem> {
         TextView nameTextView = (TextView) listItemView.findViewById(R.id.shoppingListItemName);
         nameTextView.setText(currentItem.getItemName());
 
-        TextView amountTextView = (TextView) listItemView.findViewById(R.id.shoppingListItemAmount);
-        amountTextView.setText(currentItem.getItemAmount());
+        TextView amountTextView = (TextView) listItemView.findViewById(R.id.shoppingListItemQuantity);
+        amountTextView.setText(currentItem.getItemQuantity());
 
         TextView priorityTextView = (TextView) listItemView.findViewById(R.id.shoppingListItemPriority);
         priorityTextView.setText(currentItem.getItemPriority());
 
+        ImageView priorityImageView = (ImageView) listItemView.findViewById(R.id.priority_circle);
+        if (currentItem.getItemPriority().equals("High"))
+        {
+            priorityImageView.setImageResource(R.drawable.circle_red);
+        }
+        else if (currentItem.getItemPriority().equals("Medium"))
+        {
+            priorityImageView.setImageResource(R.drawable.circle_yellow);
+        }
+        else
+        {
+            priorityImageView.setImageResource(R.drawable.circle_green);
+        }
+
         CheckBox checkBox = (CheckBox) listItemView.findViewById(R.id.check_box);
 
-        if (currentItem.getCheckBoxState() == true)
+        if (currentItem.getItemCheckBoxState() == true)
         {
             checkBox.setChecked(true);
         }

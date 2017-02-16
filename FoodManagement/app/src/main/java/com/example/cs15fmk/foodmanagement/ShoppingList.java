@@ -23,9 +23,9 @@ public class ShoppingList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_shopping_list);
 
-        shoppingItems.add(new ShoppingListItem("Grapes", "500g", "High", false));
-        shoppingItems.add(new ShoppingListItem("Chicken", "650g", "Medium", false));
-        shoppingItems.add(new ShoppingListItem("Bran Flakes", "1kg", "Low", false));
+        shoppingItems.add(new ShoppingListItem("Grapes", "2", "High", "16/02/17", true));
+        shoppingItems.add(new ShoppingListItem("Chicken", "1", "Medium", "16/02/17", false));
+        shoppingItems.add(new ShoppingListItem("Bran Flakes", "3", "Low", "16/02/17", false));
 
         adapter = new SItemAdapter (this, shoppingItems);
         listView = (ListView) findViewById(R.id.shoppinglist);
@@ -76,22 +76,24 @@ public class ShoppingList extends AppCompatActivity {
         ShoppingListItem item = shoppingItems.get(position);
 
         Intent intent = new Intent(ShoppingList.this, EditShoppingItem.class);
-        //intent.putExtra("Current name", item.getItemName());
-        //intent.putExtra("Current amount", item.getItemAmount());
-        //intent.putExtra("Current priority", item.getItemPriority());
+        intent.putExtra("Current name", item.getItemName());
+        intent.putExtra("Current amount", item.getItemQuantity());
+        intent.putExtra("Current priority", item.getItemPriority());
+        intent.putExtra("Date created", item.getItemDateCreated());
         intent.putExtra("Position", String.valueOf(position));
-        intent.putExtra("editItem", item);
+
+        //intent.putExtra("editItem", item); //parceable object with features except boolean checkbox state
         startActivityForResult(intent, 2);
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    /*public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1)
         {
             if (resultCode == RESULT_OK) {
 
                 ShoppingListItem a = data.getParcelableExtra("completeAddItem");
                 String name = a.getItemName();
-                String amount = a.getItemAmount();
+                String amount = a.getItem();
                 String priority = a.getItemPriority();
                 boolean state = a.getCheckBoxState();
                 //String name = data.getStringExtra("name");
@@ -108,8 +110,10 @@ public class ShoppingList extends AppCompatActivity {
             {
                 ShoppingListItem a = data.getParcelableExtra("completeEditItem");
                 String newName = a.getItemName();
-                String newAmount = a.getItemAmount();
+                String newAmount = a.getItemQuantity();
                 String newPriority = a.getItemPriority();
+                String newDateCreated = a.getItemDateCreated();
+
                 //CONSIDER AN UPDATE METHOD
 
                 //String newName = data.getStringExtra("newName");
@@ -120,11 +124,12 @@ public class ShoppingList extends AppCompatActivity {
 
                 ShoppingListItem edit = shoppingItems.get(Integer.valueOf(position));
                 edit.setItemName(newName);
-                edit.setItemAmount(newAmount);
+                edit.setItemQuantity(newAmount);
                 edit.setItemPrioirty(newPriority);
+                edit.setItemDateCreated(newDateCreated);
                 adapter.notifyDataSetChanged();
             }
         }
-    }
+    } */
 
 }

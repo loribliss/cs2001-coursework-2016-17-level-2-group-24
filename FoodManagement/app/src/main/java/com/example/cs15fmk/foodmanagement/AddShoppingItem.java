@@ -11,6 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import static android.view.View.Z;
 
 public class AddShoppingItem extends AppCompatActivity {
@@ -46,7 +50,11 @@ public class AddShoppingItem extends AppCompatActivity {
                 }
                 else
                 {
-                    ShoppingListItem item = new ShoppingListItem(name, amount, priority, false); //BOOLEAN ISSUE
+                    Date date = Calendar.getInstance().getTime();
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    String todaysDate = formatter.format(date);
+
+                    ShoppingListItem item = new ShoppingListItem(name, amount, priority, todaysDate, false); //BOOLEAN ISSUE
                     data.putExtra("completeAddItem", item);
 
                     //data.putExtra("name",name);
