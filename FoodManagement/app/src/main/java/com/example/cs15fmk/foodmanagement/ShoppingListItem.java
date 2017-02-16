@@ -58,10 +58,11 @@ public class ShoppingListItem implements Parcelable{
     {
         String[] data= new String[4];
         in.readStringArray(data);
-        data[0] = name;
-        data[1] = quantity;
-        data[2] = priority;
-        data[3] = dateCreated;
+        name = data[0];
+        quantity = data[1];
+        priority = data[2];
+        dateCreated = data[3];
+        //Note that order of variable writing and reading is important
     }
     @Override
     public int describeContents()

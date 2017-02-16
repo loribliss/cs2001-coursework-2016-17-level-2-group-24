@@ -30,27 +30,27 @@ public class EditShoppingItem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_shopping_item);
 
-        //ShoppingListItem a = getIntent().getParcelableExtra("editItem");
-        //String currentName = a.getItemName();
-        //String currentQuantity = a.getItemQuantity();
-        //String currentPriority = a.getItemPriority();
-        //String dateCreated = a.getItemDateCreated();
+        ShoppingListItem a = getIntent().getParcelableExtra("editItem");
+        String currentName = a.getItemName();
+        String currentQuantity = a.getItemQuantity();
+        String currentPriority = a.getItemPriority();
+        String dateCreated = a.getItemDateCreated();
 
-        //newPriority = currentPriority;
+        newPriority = currentPriority;
 
-        final String currentName = getIntent().getStringExtra("Current name");
+        //final String currentName = getIntent().getStringExtra("Current name");
         final EditText name = (EditText) findViewById(R.id.shoppingListName_Edit);
         name.setText(currentName, TextView.BufferType.EDITABLE);
 
-        final String currentQuantity = getIntent().getStringExtra("Current amount");
+        //final String currentQuantity = getIntent().getStringExtra("Current amount");
         final EditText quantity = (EditText) findViewById(R.id.shoppingListQuantity_Edit);
         quantity.setText(currentQuantity, TextView.BufferType.EDITABLE);
 
-        String dateCreated = getIntent().getStringExtra("Date created");
+        //String dateCreated = getIntent().getStringExtra("Date created");
         EditText dateCreatedView = (EditText) findViewById(R.id.shoppingListDateCreated_Edit);
         dateCreatedView.setText(dateCreated);
 
-        final String currentPriority = getIntent().getStringExtra("Current priority");
+        //final String currentPriority = getIntent().getStringExtra("Current priority");
         //final TextView priority = (TextView) findViewById(R.id.edit_priority);
         //priority.setText(currentPriority, TextView.BufferType.EDITABLE);
 
@@ -61,15 +61,12 @@ public class EditShoppingItem extends AppCompatActivity {
         TextView mediumPriorityText = (TextView)findViewById(R.id.medium_priority_text);
         TextView lowPriorityText = (TextView)findViewById(R.id.low_priority_text);
 
-        String high = "high";
-        String medium = "medium";
-
-        if (currentPriority.equals(high))
+        if (currentPriority.equals("High"))
         {
             highPriorityCircle.setImageResource(R.drawable.circle_red_selected);
             highPriorityText.setTextColor(ContextCompat.getColor(this, R.color.colourBlueSelected));
         }
-        else if (currentPriority.equals(medium))
+        else if (currentPriority.equals("Medium"))
         {
             mediumPriorityCircle.setImageResource(R.drawable.circle_yellow_selected);
             mediumPriorityText.setTextColor(ContextCompat.getColor(this, R.color.colourBlueSelected));

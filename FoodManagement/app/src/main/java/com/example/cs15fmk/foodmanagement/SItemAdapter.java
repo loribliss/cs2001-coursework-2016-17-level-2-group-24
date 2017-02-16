@@ -46,6 +46,7 @@ public class SItemAdapter extends ArrayAdapter<ShoppingListItem> {
         priorityTextView.setText(currentItem.getItemPriority());
 
         ImageView priorityImageView = (ImageView) listItemView.findViewById(R.id.priority_circle);
+
         if (currentItem.getItemPriority().equals("High"))
         {
             priorityImageView.setImageResource(R.drawable.circle_red);

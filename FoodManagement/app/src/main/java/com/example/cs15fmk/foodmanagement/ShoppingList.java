@@ -23,7 +23,7 @@ public class ShoppingList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_shopping_list);
 
-        shoppingItems.add(new ShoppingListItem("Grapes", "2", "High", "16/02/17", true));
+        shoppingItems.add(new ShoppingListItem("Grapes", "2", "High", "16/02/17", false));
         shoppingItems.add(new ShoppingListItem("Chicken", "1", "Medium", "16/02/17", false));
         shoppingItems.add(new ShoppingListItem("Bran Flakes", "3", "Low", "16/02/17", false));
 
@@ -76,18 +76,18 @@ public class ShoppingList extends AppCompatActivity {
         ShoppingListItem item = shoppingItems.get(position);
 
         Intent intent = new Intent(ShoppingList.this, EditShoppingItem.class);
-        intent.putExtra("Current name", item.getItemName());
-        intent.putExtra("Current amount", item.getItemQuantity());
-        intent.putExtra("Current priority", item.getItemPriority());
-        intent.putExtra("Date created", item.getItemDateCreated());
+        //intent.putExtra("Current name", item.getItemName());
+        //intent.putExtra("Current amount", item.getItemQuantity());
+        //intent.putExtra("Current priority", item.getItemPriority());
+        //intent.putExtra("Date created", item.getItemDateCreated());
         intent.putExtra("Position", String.valueOf(position));
 
-        //intent.putExtra("editItem", item); //parceable object with features except boolean checkbox state
+        intent.putExtra("editItem", item); //parceable object with features except boolean checkbox state
         startActivityForResult(intent, 2);
     }
 
-    /*public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1)
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        /*if (requestCode == 1)
         {
             if (resultCode == RESULT_OK) {
 
@@ -102,7 +102,7 @@ public class ShoppingList extends AppCompatActivity {
                 shoppingItems.add(new ShoppingListItem(name, amount, priority,state));
                 adapter.notifyDataSetChanged();
             }
-        }
+        } */
 
         if (requestCode ==2)
         {
@@ -130,6 +130,6 @@ public class ShoppingList extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         }
-    } */
+    }
 
 }
