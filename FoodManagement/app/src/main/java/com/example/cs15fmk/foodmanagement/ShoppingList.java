@@ -106,10 +106,10 @@ public class ShoppingList extends AppCompatActivity {
 
         if (requestCode ==2)
         {
-            String position = data.getStringExtra("position");
-            int pos = Integer.valueOf(position);
             if (resultCode == RESULT_OK)
             {
+                String position = data.getStringExtra("position");
+                int pos = Integer.valueOf(position);
                 if (data.getStringExtra("userOption").equals("edit"))
                 {
                     ShoppingListItem a = data.getParcelableExtra("completeEditItem");
