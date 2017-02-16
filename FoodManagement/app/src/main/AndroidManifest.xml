@@ -40,12 +40,19 @@
         <activity
             android:name=".FoodCupboard"
             android:label="Food Cupboard" />
-        <activity android:name=".AddShoppingItem" />
-        <activity android:name=".EditShoppingItem" />
-        <activity android:name=".AddNewFCItemMenu" />
-        <activity android:name=".AddFoodCupboardItemManual" />
-        <activity android:name=".ViewFoodCupboardItem" />
-        <activity android:name=".EditFoodCupboardItem"></activity>
+        <activity android:name=".AddShoppingItem"
+            android:label="Add New Shopping Item"/>
+        <activity android:name=".EditShoppingItem"
+            android:label="Edit Shopping Item"/>
+        <activity android:name=".AddNewFCItemMenu"
+            android:label="Add New Food Cupboard Item"/>
+        <activity android:name=".AddFoodCupboardItemManual"
+            android:label="Add New Food Cupboard Item"/>
+        <activity android:name=".ViewFoodCupboardItem"
+            android:label="Cupboard Item"/>
+        <activity android:name=".EditFoodCupboardItem"
+            android:label="Edit Food Cupboard Item">
+        </activity>
     </application>
 
 </manifest>

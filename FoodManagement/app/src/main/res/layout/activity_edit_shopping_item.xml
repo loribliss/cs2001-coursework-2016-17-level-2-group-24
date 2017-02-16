@@ -51,6 +51,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/shoppingListQuantity_Edit"
             tools:hint="Quantity: "
+            android:inputType="number"
             android:textColor="@color/colourBlack"
             android:layout_toRightOf="@id/shoppingListItemQuantity"/>
     </RelativeLayout>

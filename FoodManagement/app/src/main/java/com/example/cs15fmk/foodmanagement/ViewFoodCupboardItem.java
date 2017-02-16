@@ -73,7 +73,7 @@ public class ViewFoodCupboardItem extends AppCompatActivity {
             {
                 Intent data = new Intent();
                 data.putExtra("Position", position);
-                data.putExtra("Edit", "no ");
+                data.putExtra("Edit", "no");
                 setResult(RESULT_OK, data);
                 finish();
             }

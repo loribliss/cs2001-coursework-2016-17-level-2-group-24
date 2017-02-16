@@ -87,22 +87,23 @@ public class ShoppingList extends AppCompatActivity {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        /*if (requestCode == 1)
+        if (requestCode == 1)
         {
             if (resultCode == RESULT_OK) {
 
                 ShoppingListItem a = data.getParcelableExtra("completeAddItem");
                 String name = a.getItemName();
-                String amount = a.getItem();
+                String quantity = a.getItemQuantity();
                 String priority = a.getItemPriority();
-                boolean state = a.getCheckBoxState();
+                String dateCreated = a.getItemDateCreated();
+                boolean state = false;
                 //String name = data.getStringExtra("name");
                 //String amount = data.getStringExtra("amount");
                 //String priority = data.getStringExtra("priority");
-                shoppingItems.add(new ShoppingListItem(name, amount, priority,state));
+                shoppingItems.add(new ShoppingListItem(name, quantity, priority, dateCreated, state));
                 adapter.notifyDataSetChanged();
             }
-        } */
+        }
 
         if (requestCode ==2)
         {
