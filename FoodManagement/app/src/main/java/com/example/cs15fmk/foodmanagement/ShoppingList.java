@@ -23,8 +23,8 @@ public class ShoppingList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_shopping_list);
 
-        shoppingItems.add(new ShoppingListItem("Grapes", "2", "High", "16/02/17", false));
-        shoppingItems.add(new ShoppingListItem("Chicken", "1", "Medium", "16/02/17", false));
+        shoppingItems.add(new ShoppingListItem("Milk", "2", "High", "16/02/17", false));
+        shoppingItems.add(new ShoppingListItem("Chicken fillets", "1", "Medium", "16/02/17", false));
         shoppingItems.add(new ShoppingListItem("Bran Flakes", "3", "Low", "16/02/17", false));
 
         adapter = new SItemAdapter (this, shoppingItems);

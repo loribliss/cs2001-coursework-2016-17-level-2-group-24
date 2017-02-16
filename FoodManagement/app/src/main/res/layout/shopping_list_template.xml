@@ -10,15 +10,17 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="horizontal">
+
         <TextView
             android:layout_marginLeft="8dp"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:id="@+id/shoppingListItemName"
             android:layout_weight="1"
             tools:text="Name"
             android:textColor="@color/colourBlack"
             android:focusable="false"/>
+
         <TextView
             android:layout_marginLeft="8dp"
             android:layout_width="wrap_content"
@@ -29,14 +31,6 @@
             android:textColor="@color/colourBlack"
             android:focusable="false"/>
 
-        <TextView
-            android:layout_marginLeft="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/shoppingListItemPriority"
-            android:layout_weight="1"
-            tools:text="Priority"
-            android:textColor="@color/colourBlack"/>
         <ImageView
             android:layout_marginTop="2dp"
             android:layout_width="30dp"

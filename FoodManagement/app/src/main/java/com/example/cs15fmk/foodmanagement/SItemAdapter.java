@@ -42,8 +42,8 @@ public class SItemAdapter extends ArrayAdapter<ShoppingListItem> {
         TextView amountTextView = (TextView) listItemView.findViewById(R.id.shoppingListItemQuantity);
         amountTextView.setText(currentItem.getItemQuantity());
 
-        TextView priorityTextView = (TextView) listItemView.findViewById(R.id.shoppingListItemPriority);
-        priorityTextView.setText(currentItem.getItemPriority());
+        //TextView priorityTextView = (TextView) listItemView.findViewById(R.id.shoppingListItemPriority);
+        //priorityTextView.setText(currentItem.getItemPriority());
 
         ImageView priorityImageView = (ImageView) listItemView.findViewById(R.id.priority_circle);
 
