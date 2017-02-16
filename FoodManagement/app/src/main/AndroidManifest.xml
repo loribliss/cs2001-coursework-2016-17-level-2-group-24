@@ -34,11 +34,33 @@
             android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:theme="@style/AppTheme.NoActionBar" />
+<<<<<<< HEAD
         <activity android:name=".AddShoppingItem" />
         <activity android:name=".EditShoppingItem" />
         <activity android:name=".SItemAdapter" />
         <activity android:name=".ShoppingListItem" />
         <activity android:name=".RecyclerVIew"></activity>
+=======
+        <activity
+            android:name=".ShoppingList"
+            android:label="Shopping List" />
+        <activity
+            android:name=".FoodCupboard"
+            android:label="Food Cupboard" />
+        <activity android:name=".AddShoppingItem"
+            android:label="Add New Shopping Item"/>
+        <activity android:name=".EditShoppingItem"
+            android:label="Edit Shopping Item"/>
+        <activity android:name=".AddNewFCItemMenu"
+            android:label="Add New Food Cupboard Item"/>
+        <activity android:name=".AddFoodCupboardItemManual"
+            android:label="Add New Food Cupboard Item"/>
+        <activity android:name=".ViewFoodCupboardItem"
+            android:label="Cupboard Item"/>
+        <activity android:name=".EditFoodCupboardItem"
+            android:label="Edit Food Cupboard Item">
+        </activity>
+>>>>>>> a112afbb8d9866bc614720ebaa9e8af554c591c5
     </application>
 
 </manifest>

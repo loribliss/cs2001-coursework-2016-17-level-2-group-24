@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import static android.app.Activity.RESULT_OK;
 
 public class ShoppingListFragment extends Fragment {
+<<<<<<< HEAD
 
     private final ArrayList<ShoppingListItem> shoppingItems = new ArrayList<>();
     private SItemAdapter adapter;
@@ -85,6 +86,10 @@ public class ShoppingListFragment extends Fragment {
             }
         });
         return v;
+=======
+    public ShoppingListFragment() {
+        // Required empty public constructor
+>>>>>>> a112afbb8d9866bc614720ebaa9e8af554c591c5
     }
 
     public void editItemEntry(int position)

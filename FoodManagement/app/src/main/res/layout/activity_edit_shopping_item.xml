@@ -11,6 +11,7 @@
     tools:context="com.example.cs15fmk.foodmanagement.EditShoppingItem"
     android:orientation="vertical">
 
+<<<<<<< HEAD
     <EditText
         android:id="@+id/edit_name"
         android:layout_width="match_parent"
@@ -32,3 +33,150 @@
         android:layout_height="wrap_content"
         android:text="Edit item!"/>
 </LinearLayout>
+=======
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shoppingListItemName"
+            android:text="Name: "
+            android:textColor="@color/colourBlack"/>
+        <EditText
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/shoppingListName_Edit"
+            tools:hint="Name: "
+            android:textColor="@color/colourBlack"
+            android:layout_toRightOf="@id/shoppingListItemName"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shoppingListItemQuantity"
+            android:text="Quantity: "
+            android:textColor="@color/colourBlack"/>
+        <EditText
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/shoppingListQuantity_Edit"
+            tools:hint="Quantity: "
+            android:inputType="number"
+            android:textColor="@color/colourBlack"
+            android:layout_toRightOf="@id/shoppingListItemQuantity"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shoppingListItemDateCreated"
+            android:text="Date Created: "
+            android:textColor="@color/colourBlack"/>
+        <EditText
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/shoppingListDateCreated_Edit"
+            tools:hint="Date Created: "
+            android:textColor="@color/colourBlack"
+            android:focusable="false"
+            android:layout_toRightOf="@id/shoppingListItemDateCreated"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/edit_priority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Priority:"
+        android:layout_marginLeft="8dp"
+        android:textSize="17sp"
+        android:textColor="@color/colourBlack"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/low_priority_circle"
+            android:src="@drawable/circle_green"
+            android:layout_weight="1"/>
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/medium_priority_circle"
+            android:src="@drawable/circle_yellow"
+            android:layout_weight="1"/>
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/high_priority_circle"
+            android:src="@drawable/circle_red"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="LOW"
+            android:id="@+id/low_priority_text"
+            android:translationX="43dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="MEDIUM"
+            android:id="@+id/medium_priority_text"
+            android:translationX="44dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="HIGH"
+            android:translationX="37dp"
+            android:id="@+id/high_priority_text"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/completeEditShoppingListItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit item!"/>
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/deleteShoppingListItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete item!"/>
+</LinearLayout>
+>>>>>>> a112afbb8d9866bc614720ebaa9e8af554c591c5

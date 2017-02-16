@@ -91,8 +91,10 @@ public class MainActivity extends AppCompatActivity implements
         int id = item.getItemId();
         switch (id) {
             case R.id.cupboard:
-                fragment = new FoodCupboardFragment();
-                title = "Food Cupboard";
+                Intent openFoodCupboard = new Intent(MainActivity.this, FoodCupboard.class);
+                startActivity(openFoodCupboard);
+                //fragment = new FoodCupboardFragment();
+                //title = "Food Cupboard";
                 break;
             case R.id.find_food:
                 fragment = new FindFoodFragment();
@@ -103,8 +105,10 @@ public class MainActivity extends AppCompatActivity implements
                 title = "Recipes";
                 break;
             case R.id.shopping_list:
-                fragment = new ShoppingListFragment();
-                title = "Shoppping List";
+                Intent openShoppingList = new Intent(MainActivity.this, ShoppingList.class);
+                startActivity(openShoppingList);
+                //fragment = new ShoppingListFragment();
+                //title = "Shoppping List";
                 break;
         }
         //changes to different fragment when clicked

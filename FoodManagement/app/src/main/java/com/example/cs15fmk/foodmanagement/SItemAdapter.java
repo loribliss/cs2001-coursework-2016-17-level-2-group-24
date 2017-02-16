@@ -1,6 +1,10 @@
 package com.example.cs15fmk.foodmanagement;
 
 import android.app.Activity;
+<<<<<<< HEAD
+=======
+import android.media.Image;
+>>>>>>> a112afbb8d9866bc614720ebaa9e8af554c591c5
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +42,7 @@ public class SItemAdapter extends ArrayAdapter<ShoppingListItem> {
         TextView nameTextView = (TextView) listItemView.findViewById(R.id.shoppingListItemName);
         nameTextView.setText(currentItem.getItemName());
 
+<<<<<<< HEAD
         TextView amountTextView = (TextView) listItemView.findViewById(R.id.shoppingListItemAmount);
         amountTextView.setText(currentItem.getItemAmount());
 
@@ -47,10 +52,40 @@ public class SItemAdapter extends ArrayAdapter<ShoppingListItem> {
         CheckBox checkBox = (CheckBox) listItemView.findViewById(R.id.check_box);
 
         if (currentItem.getCheckBoxState() == true)
+=======
+        TextView amountTextView = (TextView) listItemView.findViewById(R.id.shoppingListItemQuantity);
+        amountTextView.setText(currentItem.getItemQuantity());
+
+        //TextView priorityTextView = (TextView) listItemView.findViewById(R.id.shoppingListItemPriority);
+        //priorityTextView.setText(currentItem.getItemPriority());
+
+        ImageView priorityImageView = (ImageView) listItemView.findViewById(R.id.priority_circle);
+
+        if (currentItem.getItemPriority().equals("High"))
+        {
+            priorityImageView.setImageResource(R.drawable.circle_red);
+        }
+        else if (currentItem.getItemPriority().equals("Medium"))
+        {
+            priorityImageView.setImageResource(R.drawable.circle_yellow);
+        }
+        else
+        {
+            priorityImageView.setImageResource(R.drawable.circle_green);
+        }
+
+        CheckBox checkBox = (CheckBox) listItemView.findViewById(R.id.check_box);
+
+        if (currentItem.getItemCheckBoxState() == true)
+>>>>>>> a112afbb8d9866bc614720ebaa9e8af554c591c5
         {
             checkBox.setChecked(true);
         }
 
         return listItemView;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a112afbb8d9866bc614720ebaa9e8af554c591c5

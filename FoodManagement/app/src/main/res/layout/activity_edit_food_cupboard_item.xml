@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_edit_food_cupboard_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.cs15fmk.foodmanagement.EditFoodCupboardItem"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardName"
+            android:text="Name: "
+            android:textColor="@color/colourBlack"/>
+        <EditText
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardNameEdit"
+            tools:text="Name: "
+            android:textColor="@color/colourBlack"
+            android:layout_toRightOf="@id/foodCupboardName"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardDayBought"
+            android:text="Day Bought: "
+            android:textColor="@color/colourBlack"/>
+        <EditText
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardDayBoughtEdit"
+            tools:text="Name: "
+            android:textColor="@color/colourBlack"
+            android:layout_toRightOf="@id/foodCupboardDayBought"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardDayExpiry"
+            android:text="Day Expriy: "
+            android:textColor="@color/colourBlack"/>
+        <EditText
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardDayExpiryEdit"
+            tools:text="Name: "
+            android:textColor="@color/colourBlack"
+            android:layout_toRightOf="@id/foodCupboardDayExpiry"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardAmountBought"
+            android:text="Amount Bought: "
+            android:textColor="@color/colourBlack"/>
+        <EditText
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardAmountBoughtEdit"
+            tools:text="Name: "
+            android:textColor="@color/colourBlack"
+            android:layout_toRightOf="@id/foodCupboardAmountBought"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardAmountRemaining"
+            android:text="Amount Remaining: "
+            android:textColor="@color/colourBlack"/>
+        <EditText
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardAmountRemainingEdit"
+            tools:text="Name: "
+            android:textColor="@color/colourBlack"
+            android:layout_toRightOf="@id/foodCupboardAmountRemaining"/>
+    </RelativeLayout>
+
+    <SeekBar
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="70"/>
+
+    <Button
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="finish"
+        android:id="@+id/finish_edit_cupboard_item"
+        />
+
+</LinearLayout>
