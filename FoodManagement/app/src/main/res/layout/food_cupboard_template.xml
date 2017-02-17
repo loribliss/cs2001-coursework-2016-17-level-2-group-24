@@ -13,34 +13,46 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/name_food"
-        tools:text="name"/>
+        android:id="@+id/nameFoodCupboardItem"
+        tools:text="Name"
+        android:layout_gravity="center"/>
     <TextView
         android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/days_remaining"
-        tools:text="days remaining"/>
+        android:id="@+id/daysRemainingFoodCupboardItem"
+        tools:text="Days remaining: 5"
+        android:layout_gravity="center"/>
+    <ImageView
+        android:layout_marginTop="8dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/circle_red"
+        android:id="@+id/expiryStatusFoodCupboardItem"
+        android:layout_gravity="center"/>
     <TextView
         android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/expiry_date"
-        tools:text="expriy date"/>
+        android:id="@+id/quantityRemainingFoodCupboardItem"
+        tools:text="Quantity remaining: 1"
+        android:layout_gravity="center"/>
     <TextView
         android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/amount_remaining"
-        tools:text="amount remaining"/>
+        android:id="@+id/amountRemainingFoodCupboardItem"
+        tools:text="Amount remaining: 200"
+        android:layout_gravity="center"/>
     <ProgressBar
         android:layout_marginTop="8dp"
-        android:id="@+id/progress_bar"
+        android:id="@+id/progressBarFoodCupboardItem"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:indeterminate="false"
         android:max="100"
-        android:progress="70"/>
+        android:progress="70"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

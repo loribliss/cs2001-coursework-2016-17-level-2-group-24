@@ -40,16 +40,18 @@ public class FoodCupboardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_food_cupboard, container, false);
         activity = getActivity();
 
-        cupboardItems.add(new FoodCupboardItem("Chicken", "31/01/17", "07/02/17", 400, 250));
-        cupboardItems.add(new FoodCupboardItem("Bread", "21/01/17", "08/02/17", 600, 300));
-        cupboardItems.add(new FoodCupboardItem("Cereal", "11/01/17", "09/02/17", 750, 50));
-        cupboardItems.add(new FoodCupboardItem("Beef", "01/01/17", "10/02/17", 1000, 450));
-        cupboardItems.add(new FoodCupboardItem("Milk", "01/01/17", "10/02/17", 20000, 500));
-        cupboardItems.add(new FoodCupboardItem("Wholemeal Rolls", "01/01/17", "10/02/17", 4, 2));
-        cupboardItems.add(new FoodCupboardItem("Turkey rashers", "01/01/17", "10/02/17", 8, 2));
-        cupboardItems.add(new FoodCupboardItem("Eggs", "01/01/17", "10/02/17", 12, 6));
-        cupboardItems.add(new FoodCupboardItem("Nature Valley Bars", "01/01/17", "10/02/17", 5, 3));
-        cupboardItems.add(new FoodCupboardItem("Hula Hoops", "01/01/17", "10/02/17", 10, 10));
+        cupboardItems.add(new FoodCupboardItem("Chicken", "31/01/17", "07/02/17", "8", "AMOUNT", "1", "1", "400", "500"));
+        cupboardItems.add(new FoodCupboardItem("Bread", "21/01/17", "08/02/17", "6", "QUANTITY", "12", "6","0", "0"));
+        cupboardItems.add(new FoodCupboardItem("Cereal", "11/01/17", "09/02/17", "30", "AMOUNT", "1","1", "750", "50"));
+        cupboardItems.add(new FoodCupboardItem("Beef", "01/01/17", "10/02/17", "5", "QUANTITY&AMOUNT", "3","1","1000","450"));
+        cupboardItems.add(new FoodCupboardItem("Milk", "01/01/17", "10/02/17", "5", "AMOUNT", "1","1","2000", "500"));
+        cupboardItems.add(new FoodCupboardItem("Wholemeal Rolls", "01/01/17", "10/02/17", "2","AMOUNT","4","2","0","0"));
+        cupboardItems.add(new FoodCupboardItem("Turkey rashers", "01/01/17", "10/02/17", "14", "AMOUNT", "1", "1","8","2"));
+        cupboardItems.add(new FoodCupboardItem("Eggs", "01/01/17", "10/02/17", "16", "QUANTITY&AMOUNT", "2", "2", "12", "6"));
+        cupboardItems.add(new FoodCupboardItem("Beef", "01/01/17", "10/02/17", "5", "QUANTITY&AMOUNT", "3","1","1000","450"));
+        cupboardItems.add(new FoodCupboardItem("Milk", "01/01/17", "10/02/17", "5", "AMOUNT", "1","1","2000", "500"));
+        cupboardItems.add(new FoodCupboardItem("Wholemeal Rolls", "01/01/17", "10/02/17", "2","QUANTITY","4","2","0","0"));
+        cupboardItems.add(new FoodCupboardItem("Turkey rashers", "01/01/17", "10/02/17", "14", "AMOUNT", "1", "1","8","2"));
 
         adapter = new CupboardItemAdapter (activity, cupboardItems);
         gridView = (GridView) view.findViewById(R.id.grid_cupboard);
@@ -85,20 +87,21 @@ public class FoodCupboardFragment extends Fragment {
     {
         FoodCupboardItem item = cupboardItems.get(position);
         Intent intent = new Intent(activity, ViewFoodCupboardItem.class);
-
-        intent.putExtra("Name", item.getName());
-        intent.putExtra("Day Bought", item.getDayBought());
-        intent.putExtra("Day Expiry", item.getDayExpiry());
-
-        intent.putExtra("Amount Bought", String.valueOf(item.getAmountBought()));
-        intent.putExtra("Amount Remaining", String.valueOf(item.getAmountRemaining()));
         intent.putExtra("Position", String.valueOf(position));
+        intent.putExtra("viewFoodCupboardItem", item);
+
+        //intent.putExtra("Name", item.getName());
+        //intent.putExtra("Day Bought", item.getDayBought());
+        //intent.putExtra("Day Expiry", item.getDayExpiry());
+        //intent.putExtra("Amount Bought", String.valueOf(item.getAmountBought()));
+        //intent.putExtra("Amount Remaining", String.valueOf(item.getAmountRemaining()));
+
         startActivityForResult(intent, 1);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if (requestCode == 1) {
+        /*if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
 
                 int pos = Integer.valueOf(data.getStringExtra("Position"));
@@ -140,7 +143,7 @@ public class FoodCupboardFragment extends Fragment {
                 cupboardItems.add(new FoodCupboardItem(name, dayBought, dayExpiry, amount, amount));
                 adapter.notifyDataSetChanged();
             }
-        }
+        } */
     }
 
 }

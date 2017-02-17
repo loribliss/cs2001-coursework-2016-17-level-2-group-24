@@ -2,12 +2,17 @@ package com.example.cs15fmk.foodmanagement;
 
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -33,24 +38,56 @@ public class CupboardItemAdapter extends ArrayAdapter<FoodCupboardItem> {
 
         // Get the object located at this position in the list
         FoodCupboardItem currentItem = getItem(position);
+        int daysRemaining = Integer.valueOf(currentItem.getDaysRemaining());
 
-        TextView nameTextView = (TextView) gridItemView.findViewById(R.id.name_food);
+        TextView nameTextView = (TextView) gridItemView.findViewById(R.id.nameFoodCupboardItem);
         nameTextView.setText(currentItem.getName());
 
-        TextView daysRemaniningTextView = (TextView) gridItemView.findViewById(R.id.days_remaining);
-        daysRemaniningTextView.setText(currentItem.getDayBought());
+        TextView daysRemaniningTextView = (TextView) gridItemView.findViewById(R.id.daysRemainingFoodCupboardItem);
+        daysRemaniningTextView.setText("DR: " + daysRemaining);
 
-        TextView expiryDateTextView = (TextView) gridItemView.findViewById(R.id.expiry_date);
-        expiryDateTextView.setText(currentItem.getDayExpiry());
+        ImageView expiryStatusCicle = (ImageView)gridItemView.findViewById(R.id.expiryStatusFoodCupboardItem);
+        if (daysRemaining<=2)
+        {
+            expiryStatusCicle.setImageResource(R.drawable.circle_red);
+        }
+        else if (daysRemaining<=6)
+        {
+            expiryStatusCicle.setImageResource(R.drawable.circle_yellow);
+        }
+        else
+        {
+            expiryStatusCicle.setImageResource(R.drawable.circle_green);
+        }
 
-        String amountRemaining = String.valueOf(currentItem.getAmountRemaining());
-        TextView amountRemainingTextView = (TextView) gridItemView.findViewById(R.id.amount_remaining);
-        amountRemainingTextView.setText(amountRemaining);
+        TextView quantityRemainingTextView = (TextView) gridItemView.findViewById(R.id.quantityRemainingFoodCupboardItem);
+        TextView amountRemainingTextView = (TextView) gridItemView.findViewById(R.id.amountRemainingFoodCupboardItem);
+        ProgressBar totalAmountBar = (ProgressBar) gridItemView.findViewById(R.id.progressBarFoodCupboardItem);
 
-        ProgressBar totalAmountBar = (ProgressBar) gridItemView.findViewById(R.id.progress_bar);
-        totalAmountBar.setMax(currentItem.getAmountBought());
-        totalAmountBar.setProgress(currentItem.getAmountRemaining());
-
+        if (currentItem.getUserInputType().equals("AMOUNT"))
+        {
+            quantityRemainingTextView.setText("QR :" + currentItem.getQuantityRemaining());
+            amountRemainingTextView.setText("AR: " + currentItem.getAmountRemaining());
+            totalAmountBar.setMax(Integer.valueOf(currentItem.getAmountBought()));
+            totalAmountBar.setProgress(Integer.valueOf(currentItem.getAmountRemaining()));
+            //totalAmountBar.setBackgroundColor(Color.RED);
+        }
+        else if (currentItem.getUserInputType().equals("QUANTITY&AMOUNT"))
+        {
+            quantityRemainingTextView.setText("QR :" + currentItem.getQuantityRemaining());
+            amountRemainingTextView.setText("AR: " + currentItem.getAmountRemaining());
+            totalAmountBar.setMax(Integer.valueOf(currentItem.getAmountBought()));
+            totalAmountBar.setProgress(Integer.valueOf(currentItem.getAmountRemaining()));
+            //totalAmountBar.setBackgroundColor(Color.GREEN);
+        }
+        else
+        {
+            quantityRemainingTextView.setText("QR :" + currentItem.getQuantityRemaining());
+            amountRemainingTextView.setText("AR :");
+            totalAmountBar.setMax(Integer.valueOf(currentItem.getQuantityBought()));
+            totalAmountBar.setProgress(Integer.valueOf(currentItem.getQuantityRemaining()));
+            //totalAmountBar.setBackgroundColor(Color.RED);
+        }
         return gridItemView;
     }
 }
