@@ -81,7 +81,7 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
     Marker marker;
     final static CharSequence mShopName = "";
     final static CharSequence mShopAddress = "";
-    final static int mShopPriceLevel =0;
+    final static int mShopPriceLevel = 0;
     final static float mShopRating = 0;
     ArrayList<Integer> filter = new ArrayList<>();
     String LatLng = null;
@@ -89,11 +89,16 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
     private GoogleApiClient mGoogleApiClient;
     private Context mContext;
     double value;
+    List<CharSequence> arrayName = new ArrayList<CharSequence>();
+    List<CharSequence> arrayAddress = new ArrayList<CharSequence>();
+    List<Integer> arrayPrice = new ArrayList<Integer>();
+    List<Float> arrayRating = new ArrayList<Float>();
+    List<LatLng> arrayLatLng = new ArrayList<LatLng>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_find_food, container, false);
-
         mMapView = (MapView) v.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
@@ -118,8 +123,6 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
     }
 
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,7 +131,7 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
 
     }
 
-    protected synchronized  void buildGoogleApiClient() {
+    protected synchronized void buildGoogleApiClient() {
         /*connects to google play service to use API's*/
         mGoogleApiClient = new GoogleApiClient.Builder(mActivity)
                 .addConnectionCallbacks(this)
@@ -347,12 +350,13 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
             Log.d(TAG, "Moving camera");
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mLatLng, 18);
 
-            if (marker == null) {
-                marker = mGoogleMap.addMarker(new MarkerOptions().position(mLatLng));
+            if (mGoogleMap == null) {
+                mGoogleMap.addMarker(new MarkerOptions().position(mLatLng));
                 Log.d(TAG, "ADDING MARKER");
             } else {
                 mGoogleMap.clear();
                 Log.d(TAG, "REMOVING MARKER");
+                mGoogleMap.addMarker(new MarkerOptions().position(mLatLng));
             }
             mGoogleMap.animateCamera(cameraUpdate);
             Toast.makeText(mContext, "Getting Current Location", Toast.LENGTH_SHORT).show();
@@ -361,11 +365,10 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
                     .center(mLatLng)
                     .radius(radius)
                     .strokeColor(Color.BLACK));
-            Log.d(TAG, mLatLng + "ADDD");
+
+        } else if (v.getId() == navigation) {
+            onClickMap(mLatLng);
         }
-        /*else if (v.getId() == navigation) {
-            onClickMap(v, mLatLng);
-        }*/
         if (ContextCompat.checkSelfPermission(mContext,
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -393,25 +396,31 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
                         for (int i = 0; i < 10; i++) {
 
                             CharSequence mShopName = likelyPlaces.get(i).getPlace().getName();
+
                             CharSequence mShopAddress = likelyPlaces.get(i).getPlace().getAddress();
+
                             int mShopPriceLevel = likelyPlaces.get(i).getPlace().getPriceLevel();
+
                             float mShopRating = likelyPlaces.get(i).getPlace().getRating();
+
                             mLatLng = likelyPlaces.get(i).getPlace().getLatLng();
+
                             if (i == 5) {
+                                arrayName.add(mShopName);
+                                arrayAddress.add(mShopAddress);
+                                arrayPrice.add(mShopPriceLevel);
+                                arrayRating.add(mShopRating);
+                                arrayLatLng.add(mLatLng);
                                 Log.d(TAG, "Shop name " + mShopName);
                                 Log.d(TAG, "Shop Address " + mShopAddress);
-                                Log.d(TAG, "Shop price legve " + mShopPriceLevel);
+                                Log.d(TAG, "Shop price level " + mShopPriceLevel);
                                 Log.d(TAG, "Shop Rating " + mShopRating);
-                                apple(mShopName, mShopAddress, mShopRating, mShopPriceLevel);
-                                onClickMap(v, mLatLng);
+                                slideUpPanelData();
+
                             }
 
                         }
                     }
-                    //for(int i=0;i<10;i++) {
-
-
-                    // }
 
                     likelyPlaces.release();
                 }
@@ -421,26 +430,30 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
 
     }
 
-    public void apple(CharSequence mShopName, CharSequence mShopAddress, Float mShopRating, int mShopPrice) {
+    public void slideUpPanelData() {
+        for (int i = 0; i < arrayName.size(); i++) {
+            asd = (TextView) getView().findViewById(R.id.shopName);
+            asd.setText(arrayName.get(i));
+            asd = (TextView) getView().findViewById(R.id.shopAddress);
+            asd.setText(arrayAddress.get(i));
+            asd = (TextView) getView().findViewById(R.id.shopRating);
+            asd.setText(arrayRating.get(i).toString());
+            /*asd = (TextView) getView().findViewById(R.id.shopPrice);
+            asd.setText(arrayPrice.get(i));
+            asd = (TextView) getView().findViewById(R.id.shopDistance);
+            asd.setText(arrayLatLng.get(i).toString());
+            https://developers.google.com/maps/documentation/distance-matrix/intro*/
 
-        asd = (TextView) getView().findViewById(R.id.shopName);
-        asd.setText(mShopName);
-        asd = (TextView) getView().findViewById(R.id.shopAddress);
-        asd.setText(mShopAddress);
-        asd = (TextView) getView().findViewById(R.id.shopRating);
-        asd.setText(String.valueOf(mShopRating));
-        /*asd = (TextView) getView().findViewById(R.id.shopPrice);
-        asd.setText(mShopPrice);*/
-
+        }
     }
 
 
-    public void onClickMap(View v, LatLng mLatLng) {
+    public void onClickMap(LatLng mLatLng) {
         Toast.makeText(mContext, "Opening Map", Toast.LENGTH_SHORT).show();
-        googleMapIntent(v, mLatLng);
+        googleMapIntent(mLatLng);
     }
 
-    public void googleMapIntent(View v, LatLng mLatLng) {
+    public void googleMapIntent(LatLng mLatLng) {
         mLatLng.toString();
         Uri gmmIntentUri = Uri.parse("google.navigation:q=" + mLatLng);
         Log.d(TAG, "you " + mLatLng);
@@ -452,6 +465,7 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
         }
 
     }
+
     public void radius(View v) {
 
         EditText radius = (EditText) v.findViewById(R.id.radius);
@@ -462,7 +476,7 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
             @Override
             public void afterTextChanged(Editable s) {
                 // TODO Auto-generated method stub
-                if(s.length() ==1) {
+                if (s.length() == 1) {
                     Log.d(TAG, "length:  " + s.length());
                     Log.d(TAG, "length radius :  " + radius.length());
                     radius.setText(" mile");
@@ -498,7 +512,7 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
                 Log.d(TAG, "WAITING");
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode) == KeyEvent.KEYCODE_ENTER) {
-                   // Toast.makeText(mContext,"" , Toast.LENGTH_LONG).show();
+                    // Toast.makeText(mContext,"" , Toast.LENGTH_LONG).show();
 
                     drawCircle();
                     Log.d(TAG, "problem " + radius.getText().toString());
@@ -512,16 +526,18 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
             }
         });
     }
-    public void drawCircle(){
+
+    public void drawCircle() {
         Log.d(TAG, "DRAWING CIRCLE ");
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(mLatLng, 18);
 
-        if (marker == null) {
-            marker = mGoogleMap.addMarker(new MarkerOptions().position(mLatLng));
+        if (mGoogleMap == null) {
+            mGoogleMap.addMarker(new MarkerOptions().position(mLatLng));
             Log.d(TAG, "ADDING MARKER");
         } else {
             mGoogleMap.clear();
             Log.d(TAG, "REMOVING MARKER");
+            mGoogleMap.addMarker(new MarkerOptions().position(mLatLng));
         }
         mGoogleMap.animateCamera(cameraUpdate);
         //draws circle

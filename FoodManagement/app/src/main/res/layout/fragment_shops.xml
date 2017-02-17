@@ -9,11 +9,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,7 +49,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:id="@+id/distance" />
+                android:id="@+id/shopDistance" />
 
             <TextView
                 android:id="@+id/shopRating"
@@ -97,7 +93,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:text="Direction"
                 android:textSize="16sp"
-                android:onClick=""/>
+                android:clickable="true"
+                />
 
 
         </RelativeLayout>

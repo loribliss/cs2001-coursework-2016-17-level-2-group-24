@@ -11,29 +11,6 @@
     tools:context="com.example.cs15fmk.foodmanagement.EditShoppingItem"
     android:orientation="vertical">
 
-<<<<<<< HEAD
-    <EditText
-        android:id="@+id/edit_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"/>
-    <EditText
-        android:id="@+id/edit_amount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"/>
-    <EditText
-        android:id="@+id/edit_priority"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"/>
-    <Button
-        android:id="@+id/complete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Edit item!"/>
-</LinearLayout>
-=======
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -179,4 +156,3 @@
         android:layout_height="wrap_content"
         android:text="Delete item!"/>
 </LinearLayout>
->>>>>>> a112afbb8d9866bc614720ebaa9e8af554c591c5

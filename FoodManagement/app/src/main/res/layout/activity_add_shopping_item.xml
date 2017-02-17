@@ -12,31 +12,6 @@
     android:orientation="vertical">
 
     <EditText
-<<<<<<< HEAD
-        android:id="@+id/new_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="name"
-        android:inputType="textMultiLine"/>
-    <EditText
-        android:id="@+id/new_amount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="amount"
-        android:inputType="textMultiLine"/>
-    <EditText
-        android:id="@+id/new_priority"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="priority"
-        android:inputType="textMultiLine"/>
-    <Button
-        android:id="@+id/complete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add new item!"/>
-</LinearLayout>
-=======
         android:id="@+id/newFCItem_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -117,4 +92,3 @@
         android:layout_height="wrap_content"
         android:text="Add new item!"/>
 </LinearLayout>
->>>>>>> a112afbb8d9866bc614720ebaa9e8af554c591c5

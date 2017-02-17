@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import layout.FindFoodFragment;
@@ -25,10 +27,13 @@ import layout.RecipesFragment;
 import layout.ShoppingListFragment;
 
 import static android.R.attr.fragment;
+import static com.example.cs15fmk.foodmanagement.R.id.main_menu;
+import static com.example.cs15fmk.foodmanagement.R.id.search;
 
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +68,18 @@ public class MainActivity extends AppCompatActivity implements
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar setting(top right).
         getMenuInflater().inflate(R.menu.main, menu);
+
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setIconifiedByDefault(true);
+        searchView.setFocusable(true);
+        searchView.setIconified(false);
+        searchView.requestFocusFromTouch();
+
         return true;
     }
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -91,10 +106,9 @@ public class MainActivity extends AppCompatActivity implements
         int id = item.getItemId();
         switch (id) {
             case R.id.cupboard:
-                Intent openFoodCupboard = new Intent(MainActivity.this, FoodCupboard.class);
-                startActivity(openFoodCupboard);
-                //fragment = new FoodCupboardFragment();
-                //title = "Food Cupboard";
+
+                fragment = new FoodCupboardFragment();
+                title = "Food Cupboard";
                 break;
             case R.id.find_food:
                 fragment = new FindFoodFragment();
@@ -105,10 +119,8 @@ public class MainActivity extends AppCompatActivity implements
                 title = "Recipes";
                 break;
             case R.id.shopping_list:
-                Intent openShoppingList = new Intent(MainActivity.this, ShoppingList.class);
-                startActivity(openShoppingList);
-                //fragment = new ShoppingListFragment();
-                //title = "Shoppping List";
+                fragment = new ShoppingListFragment();
+                title = "Shopping List";
                 break;
         }
         //changes to different fragment when clicked
@@ -164,6 +176,9 @@ public class MainActivity extends AppCompatActivity implements
                 break;
         }
     }
+
+
+
 
 
 }

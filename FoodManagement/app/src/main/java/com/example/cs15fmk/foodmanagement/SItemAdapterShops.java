@@ -39,7 +39,7 @@ public class SItemAdapterShops extends RecyclerView.Adapter<SItemAdapterShops.Vi
         public ViewHolder(View view) {
             super(view);
 
-            tv_country = (TextView) view.findViewById(R.id.distance);
+            tv_country = (TextView) view.findViewById(R.id.shopPrice);
         }
     }
 }

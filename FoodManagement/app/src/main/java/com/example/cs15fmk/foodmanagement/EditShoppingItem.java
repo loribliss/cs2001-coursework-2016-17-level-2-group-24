@@ -2,17 +2,6 @@ package com.example.cs15fmk.foodmanagement;
 
 import android.content.Intent;
 import android.graphics.Color;
-<<<<<<< HEAD
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import static android.R.attr.data;
-=======
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,15 +19,11 @@ import java.util.Date;
 
 import static android.R.attr.data;
 import static android.R.attr.priority;
->>>>>>> a112afbb8d9866bc614720ebaa9e8af554c591c5
 
 //remeber to INCLUDE ERROR CHECK FOR BLANK ENTRIES
 public class EditShoppingItem extends AppCompatActivity {
 
-<<<<<<< HEAD
-=======
     private String newPriority;
->>>>>>> a112afbb8d9866bc614720ebaa9e8af554c591c5
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -46,53 +31,6 @@ public class EditShoppingItem extends AppCompatActivity {
         setContentView(R.layout.activity_edit_shopping_item);
 
         ShoppingListItem a = getIntent().getParcelableExtra("editItem");
-<<<<<<< HEAD
-        String currentname = a.getItemName();
-        String currentamount = a.getItemAmount();
-        String currentpriority = a.getItemPriority();
-
-
-        //final String currentname = getIntent().getStringExtra("Current name");
-        final EditText name = (EditText) findViewById(R.id.edit_name);
-        name.setText(currentname, TextView.BufferType.EDITABLE);
-
-        //final String currentamount = getIntent().getStringExtra("Current amount");
-        final EditText amount = (EditText) findViewById(R.id.edit_amount);
-        amount.setText(currentamount, TextView.BufferType.EDITABLE);
-
-        //final String currentpriority = getIntent().getStringExtra("Current priority");
-        final EditText priority = (EditText) findViewById(R.id.edit_priority);
-        priority.setText(currentpriority, TextView.BufferType.EDITABLE);
-
-        Button editItem = (Button) findViewById(R.id.complete);
-        editItem.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            Intent data = new Intent();
-                                            String newName = name.getText().toString();
-                                            String newAmount = amount.getText().toString();
-                                            String newPriority = priority.getText().toString();
-                                            String position = getIntent().getStringExtra("Position");
-
-                                            if (checkEntry(name, newName, "name") == false | checkEntry(amount, newAmount, "amount") == false | checkEntry(priority, newPriority, "priority") == false)
-                                            {
-                                                Toast.makeText(EditShoppingItem.this, "One or more entries are incomplete", Toast.LENGTH_SHORT).show();
-                                            }
-                                            else
-                                            {
-                                                ShoppingListItem item = new ShoppingListItem(newName, newAmount, newPriority, false); //BOOLEAN ISSUE
-                                                data.putExtra("completeEditItem", item);
-                                                //data.putExtra("newName", newName);
-                                                //data.putExtra("newAmount", newAmount);
-                                                //data.putExtra("newPriority", newPriority);
-                                                data.putExtra("position", position);
-
-                                                setResult(RESULT_OK, data);
-                                                finish();
-                                            }
-                                        }
-                                    }
-=======
         String currentName = a.getItemName();
         String currentQuantity = a.getItemQuantity();
         String currentPriority = a.getItemPriority();
@@ -198,32 +136,31 @@ public class EditShoppingItem extends AppCompatActivity {
 
         Button editItem = (Button) findViewById(R.id.completeEditShoppingListItem);
         editItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent data = new Intent();
-                String newName = name.getText().toString();
-                String newAmount = quantity.getText().toString();
-                String position = getIntent().getStringExtra("Position");
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent data = new Intent();
+                                            String newName = name.getText().toString();
+                                            String newAmount = quantity.getText().toString();
+                                            String position = getIntent().getStringExtra("Position");
 
-                if (checkEntry(name, newName, "name") == false | checkEntry(quantity, newAmount, "amount") == false)
-                {
-                    Toast.makeText(EditShoppingItem.this, "One or more entries are incomplete", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    ShoppingListItem item = new ShoppingListItem(newName, newAmount, newPriority, dateCreated, false); //BOOLEAN ISSUE
-                    data.putExtra("completeEditItem", item);
-                    //data.putExtra("newName", newName);
-                    //data.putExtra("newAmount", newAmount);
-                    //data.putExtra("newPriority", newPriority);
-                    data.putExtra("position", position);
-                    data.putExtra("userOption", "edit");
-                    setResult(RESULT_OK, data);
-                    finish();
-                }
-            }
-        }
->>>>>>> a112afbb8d9866bc614720ebaa9e8af554c591c5
+                                            if (checkEntry(name, newName, "name") == false | checkEntry(quantity, newAmount, "amount") == false)
+                                            {
+                                                Toast.makeText(EditShoppingItem.this, "One or more entries are incomplete", Toast.LENGTH_SHORT).show();
+                                            }
+                                            else
+                                            {
+                                                ShoppingListItem item = new ShoppingListItem(newName, newAmount, newPriority, dateCreated, false); //BOOLEAN ISSUE
+                                                data.putExtra("completeEditItem", item);
+                                                //data.putExtra("newName", newName);
+                                                //data.putExtra("newAmount", newAmount);
+                                                //data.putExtra("newPriority", newPriority);
+                                                data.putExtra("position", position);
+                                                data.putExtra("userOption", "edit");
+                                                setResult(RESULT_OK, data);
+                                                finish();
+                                            }
+                                        }
+                                    }
         );
     }
 
@@ -238,7 +175,3 @@ public class EditShoppingItem extends AppCompatActivity {
         return true;
     }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> a112afbb8d9866bc614720ebaa9e8af554c591c5

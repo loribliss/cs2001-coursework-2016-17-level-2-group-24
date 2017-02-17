@@ -1,3 +1,4 @@
+/*
 package com.example.cs15fmk.foodmanagement;
 
 import android.os.Bundle;
@@ -36,4 +37,4 @@ public class RecyclerVIew extends AppCompatActivity {
         RecyclerView.Adapter adapter = new SItemAdapterShops(countries);
         recyclerView.setAdapter(adapter);
     }
-}
+}*/

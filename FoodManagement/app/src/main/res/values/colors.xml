@@ -4,11 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colourBlack">#000000 </color>
-<<<<<<< HEAD
-=======
     <color name="colourRed">#f91b10</color>
     <color name="colourGreen">#3ae114</color>
     <color name="colourYellow">#edfa1e</color>
     <color name="colourBlueSelected">#2ccff2</color>
->>>>>>> a112afbb8d9866bc614720ebaa9e8af554c591c5
 </resources>

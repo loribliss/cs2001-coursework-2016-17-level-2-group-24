@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,37 +25,32 @@ import java.util.ArrayList;
 import static android.app.Activity.RESULT_OK;
 
 public class ShoppingListFragment extends Fragment {
-<<<<<<< HEAD
 
     private final ArrayList<ShoppingListItem> shoppingItems = new ArrayList<>();
     private SItemAdapter adapter;
     private ListView listView;
     private Activity activity;
-
-    //Changed Protected to public
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                         Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View v = inflater.inflate(R.layout.fragment_shopping_list, container, false);
-        activity = getActivity();
+        View view = inflater.inflate(R.layout.fragment_shopping_list, container, false);
 
-
-        shoppingItems.add(new ShoppingListItem("Grapes", "500g", "High", false));
-        shoppingItems.add(new ShoppingListItem("Chicken", "650g", "Medium", false));
-        shoppingItems.add(new ShoppingListItem("Bran Flakes", "1kg", "Low", false));
+        shoppingItems.add(new ShoppingListItem("Milk", "2", "High", "16/02/17", false));
+        shoppingItems.add(new ShoppingListItem("Chicken fillets", "1", "Medium", "16/02/17", false));
+        shoppingItems.add(new ShoppingListItem("Bran Flakes", "3", "Low", "16/02/17", false));
 
         adapter = new SItemAdapter (activity, shoppingItems);
-        listView = (ListView) v.findViewById(R.id.shoppinglist);
+        listView = (ListView) view.findViewById(R.id.shoppinglist);
         listView.setAdapter(adapter);
 
-        FloatingActionButton addNewItem = (FloatingActionButton)v.findViewById(R.id.add_new_shopping_item);
+        FloatingActionButton addNewItem = (FloatingActionButton) view.findViewById(R.id.add_new_shopping_item);
         addNewItem.setOnClickListener(new View.OnClickListener()
                                       {
                                           @Override
                                           public void onClick(View view)
                                           {
-                                              Intent intent = new Intent(activity , AddShoppingItem.class);
+                                              Intent intent = new Intent(activity, AddShoppingItem.class);
                                               startActivityForResult(intent, 1);
                                           }
                                       }
@@ -85,11 +82,7 @@ public class ShoppingListFragment extends Fragment {
                 return true;
             }
         });
-        return v;
-=======
-    public ShoppingListFragment() {
-        // Required empty public constructor
->>>>>>> a112afbb8d9866bc614720ebaa9e8af554c591c5
+        return view;
     }
 
     public void editItemEntry(int position)
@@ -98,10 +91,11 @@ public class ShoppingListFragment extends Fragment {
 
         Intent intent = new Intent(activity, EditShoppingItem.class);
         //intent.putExtra("Current name", item.getItemName());
-        //intent.putExtra("Current amount", item.getItemAmount());
+        //intent.putExtra("Current amount", item.getItemQuantity());
         //intent.putExtra("Current priority", item.getItemPriority());
+        //intent.putExtra("Date created", item.getItemDateCreated());
         intent.putExtra("Position", String.valueOf(position));
-        intent.putExtra("editItem", item);
+        intent.putExtra("editItem", item); //parceable object with features except boolean checkbox state
         startActivityForResult(intent, 2);
     }
 
@@ -112,13 +106,14 @@ public class ShoppingListFragment extends Fragment {
 
                 ShoppingListItem a = data.getParcelableExtra("completeAddItem");
                 String name = a.getItemName();
-                String amount = a.getItemAmount();
+                String quantity = a.getItemQuantity();
                 String priority = a.getItemPriority();
-                boolean state = a.getCheckBoxState();
+                String dateCreated = a.getItemDateCreated();
+                boolean state = false;
                 //String name = data.getStringExtra("name");
                 //String amount = data.getStringExtra("amount");
                 //String priority = data.getStringExtra("priority");
-                shoppingItems.add(new ShoppingListItem(name, amount, priority,state));
+                shoppingItems.add(new ShoppingListItem(name, quantity, priority, dateCreated, state));
                 adapter.notifyDataSetChanged();
             }
         }
@@ -127,23 +122,34 @@ public class ShoppingListFragment extends Fragment {
         {
             if (resultCode == RESULT_OK)
             {
-                ShoppingListItem a = data.getParcelableExtra("completeEditItem");
-                String newName = a.getItemName();
-                String newAmount = a.getItemAmount();
-                String newPriority = a.getItemPriority();
-                //CONSIDER AN UPDATE METHOD
-
-                //String newName = data.getStringExtra("newName");
-                //String newAmount = data.getStringExtra("newAmount");
-                //String newPriority = data.getStringExtra("newPriority");
-
                 String position = data.getStringExtra("position");
+                int pos = Integer.valueOf(position);
+                if (data.getStringExtra("userOption").equals("edit"))
+                {
+                    ShoppingListItem a = data.getParcelableExtra("completeEditItem");
+                    String newName = a.getItemName();
+                    String newAmount = a.getItemQuantity();
+                    String newPriority = a.getItemPriority();
+                    String newDateCreated = a.getItemDateCreated();
 
-                ShoppingListItem edit = shoppingItems.get(Integer.valueOf(position));
-                edit.setItemName(newName);
-                edit.setItemAmount(newAmount);
-                edit.setItemPrioirty(newPriority);
-                adapter.notifyDataSetChanged();
+                    //CONSIDER AN UPDATE METHOD
+                    //String newName = data.getStringExtra("newName");
+                    //String newAmount = data.getStringExtra("newAmount");
+                    //String newPriority = data.getStringExtra("newPriority");
+
+                    ShoppingListItem edit = shoppingItems.get(pos);
+                    edit.setItemName(newName);
+                    edit.setItemQuantity(newAmount);
+                    edit.setItemPrioirty(newPriority);
+                    edit.setItemDateCreated(newDateCreated);
+                    adapter.notifyDataSetChanged();
+                }
+                else
+                {
+                    Toast.makeText(activity, "You have just deleted " + shoppingItems.get(pos).getItemName(), Toast.LENGTH_SHORT).show();
+                    shoppingItems.remove(pos);
+                    adapter.notifyDataSetChanged(); //deletion does not change anything permanently if you exit the screen
+                }
             }
         }
     }
