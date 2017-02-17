@@ -41,7 +41,7 @@ public class FoodCupboardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_food_cupboard, container, false);
         activity = getActivity();
 
-        cupboardItems.add(new FoodCupboardItem("Chicken", "31/01/17", "07/02/17", "8", "AMOUNT", "1", "1", "400", "500"));
+        cupboardItems.add(new FoodCupboardItem("Chicken", "31/01/17", "07/02/17", "8", "AMOUNT", "1", "1", "400", "300"));
         cupboardItems.add(new FoodCupboardItem("Bread", "21/01/17", "08/02/17", "6", "QUANTITY", "12", "6","0", "0"));
         cupboardItems.add(new FoodCupboardItem("Cereal", "11/01/17", "09/02/17", "30", "AMOUNT", "1","1", "750", "50"));
         cupboardItems.add(new FoodCupboardItem("Beef", "01/01/17", "10/02/17", "5", "QUANTITY&AMOUNT", "3","1","1000","450"));

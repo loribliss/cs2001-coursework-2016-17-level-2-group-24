@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardNameEdit"
-            tools:text="Name: "
+            tools:text="name "
             android:textColor="@color/colourBlack"
             android:layout_toRightOf="@id/foodCupboardName"/>
     </RelativeLayout>
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardDayBoughtEdit"
-            tools:text="Name: "
+            tools:text="day bought locked "
             android:textColor="@color/colourBlack"
             android:layout_toRightOf="@id/foodCupboardDayBought"
             android:focusable="false"/>
@@ -72,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardDayExpiryEdit"
-            tools:text="Name: "
+            tools:text="day expiry edit "
             android:textColor="@color/colourBlack"
             android:layout_toRightOf="@id/foodCupboardDayExpiry"/>
     </RelativeLayout>
@@ -93,8 +93,8 @@
             android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/foodCupboardDayRemainingEdit"
-            tools:text="Name: "
+            android:id="@+id/foodCupboardDaysRemainingEdit"
+            tools:text="days remaining locked "
             android:textColor="@color/colourBlack"
             android:layout_toRightOf="@id/foodCupboardDaysRemaining"
             android:focusable="false"/>
@@ -147,9 +147,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardQuantityBoughtEdit"
-            tools:text="8 "
+            tools:text="8"
             android:textColor="@color/colourBlack"
-            android:focusable="false"
             android:layout_alignBaseline="@+id/foodCupboardQuantityBought"
             android:layout_toRightOf="@+id/foodCupboardQuantityBought"/>
         <TextView
@@ -168,7 +167,6 @@
             android:id="@+id/foodCupboardQuantityRemainingEdit"
             tools:text="2 "
             android:textColor="@color/colourBlack"
-            android:focusable="false"
             android:layout_alignBaseline="@+id/foodCupboardQuantityRemaining"
             android:layout_toRightOf="@+id/foodCupboardQuantityRemaining"/>
     </RelativeLayout>
@@ -190,9 +188,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardAmountBoughtEdit"
-            tools:text="8 "
+            tools:text="8"
             android:textColor="@color/colourBlack"
-            android:focusable="false"
             android:layout_alignBaseline="@+id/foodCupboardAmountBought"
             android:layout_toRightOf="@+id/foodCupboardAmountBought"/>
         <TextView
@@ -211,7 +208,6 @@
             android:id="@+id/foodCupboardAmountRemainingEdit"
             tools:text="2 "
             android:textColor="@color/colourBlack"
-            android:focusable="false"
             android:layout_alignBaseline="@+id/foodCupboardAmountRemaining"
             android:layout_toRightOf="@+id/foodCupboardAmountRemaining"/>
     </RelativeLayout>
@@ -219,7 +215,7 @@
     <SeekBar
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         android:id="@+id/seek_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
