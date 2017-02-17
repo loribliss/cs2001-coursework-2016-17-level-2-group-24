@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardNameInput"
-            tools:text="Name: "
+            tools:text="name"
             android:textColor="@color/colourBlack"
             android:layout_toRightOf="@id/foodCupboardName"/>
     </RelativeLayout>
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardDayBoughtInput"
-            tools:text="Name: "
+            tools:text="daybought"
             android:textColor="@color/colourBlack"
             android:layout_toRightOf="@id/foodCupboardDayBought"/>
     </RelativeLayout>
@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardDayExpiryInput"
-            tools:text="Name: "
+            tools:text="dayexpiry "
             android:textColor="@color/colourBlack"
             android:layout_toRightOf="@id/foodCupboardDayExpiry"/>
     </RelativeLayout>
@@ -85,47 +85,116 @@
             android:layout_marginLeft="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/foodCupboardAmountBought"
-            android:text="Amount Bought: "
+            android:id="@+id/foodCupboardDaysRemaining"
+            android:text="Days Remaining: "
             android:textColor="@color/colourBlack"/>
         <TextView
             android:layout_marginTop="16dp"
             android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/foodCupboardAmountBoughtInput"
-            tools:text="Name: "
+            android:id="@+id/foodCupboardDaysRemainingInput"
+            tools:text="daysremaining "
             android:textColor="@color/colourBlack"
-            android:layout_toRightOf="@id/foodCupboardAmountBought"/>
+            android:layout_toRightOf="@id/foodCupboardDaysRemaining" />
+        <ImageView
+            android:layout_marginTop="2dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/circle_red"
+            android:id="@+id/daysRemainingCircleView"
+            android:layout_toRightOf="@id/foodCupboardDaysRemainingInput"
+            android:translationX="30dp" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+        <TextView
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/foodCupboardQuantityBought"
+        android:text="Quantity Bought: "
+        android:textColor="@color/colourBlack"/>
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardQuantityBoughtInput"
+            tools:text="12 "
+            android:textColor="@color/colourBlack"
+            android:layout_toRightOf="@id/foodCupboardQuantityBought"/>
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardQuantityRemaining"
+            android:layout_toRightOf="@id/foodCupboardQuantityBoughtInput"
+            android:text="Quantity Remaining: "
+            android:textColor="@color/colourBlack"/>
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardQuantityRemainingInput"
+            tools:text="12 "
+            android:textColor="@color/colourBlack"
+            android:layout_toRightOf="@id/foodCupboardQuantityRemaining"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
         <TextView
             android:layout_marginTop="16dp"
             android:layout_marginLeft="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardAmountBought"
+            android:text="Amount Bought: "
+            android:textColor="@color/colourBlack"/>
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardAmountBoughtInput"
+            tools:text="500 "
+            android:textColor="@color/colourBlack"
+            android:layout_toRightOf="@id/foodCupboardAmountBought"/>
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/foodCupboardAmountRemaining"
+            android:layout_toRightOf="@id/foodCupboardAmountBoughtInput"
             android:text="Amount Remaining: "
             android:textColor="@color/colourBlack"/>
         <TextView
             android:layout_marginTop="16dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardAmountRemainingInput"
-            tools:text="Name: "
+            tools:text="500 "
             android:textColor="@color/colourBlack"
             android:layout_toRightOf="@id/foodCupboardAmountRemaining"/>
+
     </RelativeLayout>
 
     <ProgressBar
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
-        android:id="@+id/progress_bar"
+        android:id="@+id/progressBarViewFoodCupboardItem"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

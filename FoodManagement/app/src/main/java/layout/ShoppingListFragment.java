@@ -40,20 +40,21 @@ public class ShoppingListFragment extends Fragment {
         shoppingItems.add(new ShoppingListItem("Chicken fillets", "1", "Medium", "16/02/17", false));
         shoppingItems.add(new ShoppingListItem("Bran Flakes", "3", "Low", "16/02/17", false));
 
+        activity = getActivity();
         adapter = new SItemAdapter (activity, shoppingItems);
         listView = (ListView) view.findViewById(R.id.shoppinglist);
         listView.setAdapter(adapter);
 
         FloatingActionButton addNewItem = (FloatingActionButton) view.findViewById(R.id.add_new_shopping_item);
         addNewItem.setOnClickListener(new View.OnClickListener()
-                                      {
-                                          @Override
-                                          public void onClick(View view)
-                                          {
-                                              Intent intent = new Intent(activity, AddShoppingItem.class);
-                                              startActivityForResult(intent, 1);
-                                          }
-                                      }
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(activity, AddShoppingItem.class);
+                startActivityForResult(intent, 1);
+            }
+        }
         );
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
