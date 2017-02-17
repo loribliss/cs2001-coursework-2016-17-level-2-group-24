@@ -47,11 +47,12 @@ public class AddNewFCItemMenu extends AppCompatActivity {
             if (resultCode == RESULT_OK)
             {
                 Intent datas = new Intent();
-
-                datas.putExtra("newFCName", data.getStringExtra("new_FC_Name"));
-                datas.putExtra("newFCDayBought",data.getStringExtra("new_FC_DayBought"));
-                datas.putExtra("newFCDayExpiry",data.getStringExtra("new_FC_DayExpiry"));
-                datas.putExtra("newFCAmountBought",data.getStringExtra("new_FC_AmountBought"));
+                FoodCupboardItem newItem = data.getParcelableExtra("newItem");
+                datas.putExtra("returnNewItem", newItem);
+                //datas.putExtra("newFCName", data.getStringExtra("new_FC_Name"));
+                //datas.putExtra("newFCDayBought",data.getStringExtra("new_FC_DayBought"));
+                //datas.putExtra("newFCDayExpiry",data.getStringExtra("new_FC_DayExpiry"));
+                //datas.putExtra("newFCAmountBought",data.getStringExtra("new_FC_AmountBought"));
                 setResult(RESULT_OK, datas);
                 finish();
 

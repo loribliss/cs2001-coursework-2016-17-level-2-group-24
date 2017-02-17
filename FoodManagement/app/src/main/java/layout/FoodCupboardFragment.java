@@ -22,6 +22,7 @@ import com.example.cs15fmk.foodmanagement.ViewFoodCupboardItem;
 
 import java.util.ArrayList;
 
+import static android.R.attr.name;
 import static android.app.Activity.RESULT_OK;
 
 public class FoodCupboardFragment extends Fragment {
@@ -101,7 +102,7 @@ public class FoodCupboardFragment extends Fragment {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        /*if (requestCode == 1) {
+        if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
 
                 int pos = Integer.valueOf(data.getStringExtra("Position"));
@@ -109,7 +110,7 @@ public class FoodCupboardFragment extends Fragment {
                 if (data.getStringExtra("Edit").equals("yes"))
                 {
                     //edit functionality, also need to beware finish functionalitym could set position as specific text e.g. none, edit to indicate intention
-                    cupboardItems.get(pos).setName(data.getStringExtra("updatedName"));
+                    /* cupboardItems.get(pos).setName(data.getStringExtra("updatedName"));
                     cupboardItems.get(pos).setDayBought(data.getStringExtra("updatedDayBought"));
                     cupboardItems.get(pos).setDayExpiry(data.getStringExtra("updatedDayExpiry"));
                     cupboardItems.get(pos).setAmountBought(Integer.valueOf(data.getStringExtra("updatedAmountBought")));
@@ -117,7 +118,7 @@ public class FoodCupboardFragment extends Fragment {
 
                     Toast.makeText(activity, "You have just updated " + cupboardItems.get(pos).getName(), Toast.LENGTH_SHORT).show();
 
-                    adapter.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged(); */
                 }
 
                 else
@@ -134,16 +135,11 @@ public class FoodCupboardFragment extends Fragment {
             //add new item
             if (resultCode == RESULT_OK)
             {
-                String name = data.getStringExtra("newFCName");
-                String dayBought = data.getStringExtra("newFCDayBought");
-                String dayExpiry = data.getStringExtra("newFCDayExpiry");
-                String amountBought = data.getStringExtra("newFCAmountBought");
-                int amount = Integer.valueOf(amountBought);
-
-                cupboardItems.add(new FoodCupboardItem(name, dayBought, dayExpiry, amount, amount));
+                FoodCupboardItem newItem = data.getParcelableExtra("returnNewItem");
+                cupboardItems.add(newItem);
                 adapter.notifyDataSetChanged();
             }
-        } */
+        }
     }
 
 }
