@@ -51,7 +51,8 @@
             android:id="@+id/foodCupboardDayBoughtEdit"
             tools:text="Name: "
             android:textColor="@color/colourBlack"
-            android:layout_toRightOf="@id/foodCupboardDayBought"/>
+            android:layout_toRightOf="@id/foodCupboardDayBought"
+            android:focusable="false"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -84,40 +85,135 @@
             android:layout_marginLeft="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/foodCupboardAmountBought"
-            android:text="Amount Bought: "
+            android:id="@+id/foodCupboardDaysRemaining"
+            android:text="Days Remaining: "
             android:textColor="@color/colourBlack"/>
         <EditText
             android:layout_marginTop="3dp"
             android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/foodCupboardAmountBoughtEdit"
+            android:id="@+id/foodCupboardDayRemainingEdit"
             tools:text="Name: "
             android:textColor="@color/colourBlack"
-            android:layout_toRightOf="@id/foodCupboardAmountBought"/>
+            android:layout_toRightOf="@id/foodCupboardDaysRemaining"
+            android:focusable="false"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+        <Button
+            android:id="@+id/editFCQuantityOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantity"/>
+        <Button
+            android:id="@+id/editFCAmountOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amount"
+            android:layout_toRightOf="@id/editFCQuantityOption"/>
+        <Button
+            android:id="@+id/editFCBothQuantityAndAmountOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantity / Amount"
+            android:layout_toRightOf="@id/editFCAmountOption"/>
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editFCHintBox"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="8dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/foodCupboardQuantityHolder">
         <TextView
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardQuantityBought"
+            android:text="Quantity Bought: "
+            android:textColor="@color/colourBlack"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardQuantityBoughtEdit"
+            tools:text="8 "
+            android:textColor="@color/colourBlack"
+            android:focusable="false"
+            android:layout_alignBaseline="@+id/foodCupboardQuantityBought"
+            android:layout_toRightOf="@+id/foodCupboardQuantityBought"/>
+        <TextView
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardQuantityRemaining"
+            android:text="Quantity Remaining: "
+            android:textColor="@color/colourBlack"
+            android:layout_toRightOf="@id/foodCupboardQuantityBoughtEdit"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardQuantityRemainingEdit"
+            tools:text="2 "
+            android:textColor="@color/colourBlack"
+            android:focusable="false"
+            android:layout_alignBaseline="@+id/foodCupboardQuantityRemaining"
+            android:layout_toRightOf="@+id/foodCupboardQuantityRemaining"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/foodCupboardAmountHolder">
+        <TextView
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardAmountBought"
+            android:text="Amount Bought: "
+            android:textColor="@color/colourBlack"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/foodCupboardAmountBoughtEdit"
+            tools:text="8 "
+            android:textColor="@color/colourBlack"
+            android:focusable="false"
+            android:layout_alignBaseline="@+id/foodCupboardAmountBought"
+            android:layout_toRightOf="@+id/foodCupboardAmountBought"/>
+        <TextView
+            android:layout_marginTop="12dp"
             android:layout_marginLeft="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardAmountRemaining"
             android:text="Amount Remaining: "
-            android:textColor="@color/colourBlack"/>
+            android:textColor="@color/colourBlack"
+            android:layout_toRightOf="@id/foodCupboardAmountBoughtEdit"/>
+
         <EditText
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="20dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardAmountRemainingEdit"
-            tools:text="Name: "
+            tools:text="2 "
             android:textColor="@color/colourBlack"
-            android:layout_toRightOf="@id/foodCupboardAmountRemaining"/>
+            android:focusable="false"
+            android:layout_alignBaseline="@+id/foodCupboardAmountRemaining"
+            android:layout_toRightOf="@+id/foodCupboardAmountRemaining"/>
     </RelativeLayout>
 
     <SeekBar

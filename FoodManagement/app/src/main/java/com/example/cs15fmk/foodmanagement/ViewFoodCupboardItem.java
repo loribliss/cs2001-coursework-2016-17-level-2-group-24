@@ -20,6 +20,7 @@ import static android.R.attr.name;
 public class ViewFoodCupboardItem extends AppCompatActivity {
 
     private FoodCupboardItem currentItem;
+    private FoodCupboardItem updatedItem;
     /*private String name;
     private String dayBought;
     private String dayExpiry;
@@ -60,7 +61,7 @@ public class ViewFoodCupboardItem extends AppCompatActivity {
         progress = (ProgressBar) findViewById(R.id.progressBarViewFoodCupboardItem);
         updateViewPageText();
 
-        position = getIntent().getStringExtra("Position");
+        position = getIntent().getStringExtra("POSITION");
 
         Button editCupboardItem = (Button)findViewById(R.id.edit_cupboard_item);
         editCupboardItem.setOnClickListener(new View.OnClickListener()
@@ -101,15 +102,15 @@ public class ViewFoodCupboardItem extends AppCompatActivity {
             {
                 Intent data = new Intent();
                 data.putExtra("updatedItem", currentItem);
+                data.putExtra("Position", position);
+                data.putExtra("Edit", "yes");
+                setResult(RESULT_OK, data);
+                finish();
                 /*data.putExtra("updatedName", name);
                 data.putExtra("updatedDayBought", dayBought);
                 data.putExtra("updatedDayExpiry",dayExpiry);
                 data.putExtra("updatedAmountBought",amountBought);
                 data.putExtra("updatedAmountRemaining", amountRemaining); */
-                data.putExtra("Position", position);
-                data.putExtra("Edit", "yes");
-                setResult(RESULT_OK, data);
-                finish();
             }
         }
         );
@@ -127,20 +128,17 @@ public class ViewFoodCupboardItem extends AppCompatActivity {
         startActivityForResult(intent, 1);
     } */
 
-    /*public void onActivityResult(int requestCode, int resultCode, Intent data)
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
 
-                name = data.getStringExtra("New Name");
-                dayBought = data.getStringExtra("New Day Bought");
-                dayExpiry = data.getStringExtra("New Day Expiry");
-                amountBought = data.getStringExtra("New Amount Bought");
-                amountRemaining = data.getStringExtra("New Amount Remaining");
+                updatedItem = data.getParcelableExtra("editedItem");
+                currentItem = updatedItem;
                 updateViewPageText();
             }
         }
-    } */
+    }
 
     private void updateViewPageText()
     {
