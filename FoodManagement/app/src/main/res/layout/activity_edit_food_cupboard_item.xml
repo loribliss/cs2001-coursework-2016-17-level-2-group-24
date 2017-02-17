@@ -73,6 +73,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardDayExpiryEdit"
             tools:text="day expiry edit "
+            android:inputType="date"
             android:textColor="@color/colourBlack"
             android:layout_toRightOf="@id/foodCupboardDayExpiry"/>
     </RelativeLayout>
@@ -128,6 +129,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/editFCHintBox"
         android:textSize="16sp"
+        tools:text="hints"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="8dp"/>
 
@@ -148,6 +150,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardQuantityBoughtEdit"
             tools:text="8"
+            android:inputType="number"
             android:textColor="@color/colourBlack"
             android:layout_alignBaseline="@+id/foodCupboardQuantityBought"
             android:layout_toRightOf="@+id/foodCupboardQuantityBought"/>
@@ -166,6 +169,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardQuantityRemainingEdit"
             tools:text="2 "
+            android:inputType="number"
             android:textColor="@color/colourBlack"
             android:layout_alignBaseline="@+id/foodCupboardQuantityRemaining"
             android:layout_toRightOf="@+id/foodCupboardQuantityRemaining"/>
@@ -189,6 +193,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardAmountBoughtEdit"
             tools:text="8"
+            android:inputType="number"
             android:textColor="@color/colourBlack"
             android:layout_alignBaseline="@+id/foodCupboardAmountBought"
             android:layout_toRightOf="@+id/foodCupboardAmountBought"/>
@@ -207,6 +212,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardAmountRemainingEdit"
             tools:text="2 "
+            android:inputType="number"
             android:textColor="@color/colourBlack"
             android:layout_alignBaseline="@+id/foodCupboardAmountRemaining"
             android:layout_toRightOf="@+id/foodCupboardAmountRemaining"/>

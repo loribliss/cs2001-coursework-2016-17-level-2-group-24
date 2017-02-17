@@ -40,7 +40,10 @@ public class ViewFoodCupboardItem extends AppCompatActivity {
     private TextView quantityRemainingView;
     private TextView amountBoughtView;
     private TextView amountRemainingView;
-
+    private TextView amountBoughtTitle;
+    private TextView amountRemainingTitle;
+    private TextView quantityBoughtTitle;
+    private TextView quantityRemainingTitle;
     private String position; //one value alwayss
 
     @Override
@@ -59,6 +62,11 @@ public class ViewFoodCupboardItem extends AppCompatActivity {
         amountBoughtView = (TextView) findViewById(R.id.foodCupboardAmountBoughtInput);
         amountRemainingView = (TextView) findViewById(R.id.foodCupboardAmountRemainingInput);
         progress = (ProgressBar) findViewById(R.id.progressBarViewFoodCupboardItem);
+        amountBoughtTitle = (TextView)findViewById(R.id.foodCupboardAmountBought);
+        amountRemainingTitle = (TextView)findViewById(R.id.foodCupboardAmountRemaining);
+        quantityBoughtTitle =  (TextView)findViewById(R.id.foodCupboardQuantityBought);
+        quantityRemainingTitle = (TextView)findViewById(R.id.foodCupboardQuantityRemaining);
+
         updateViewPageText();
 
         position = getIntent().getStringExtra("POSITION");
@@ -150,12 +158,18 @@ public class ViewFoodCupboardItem extends AppCompatActivity {
         if (currentItem.getUserInputType().equals("AMOUNT"))
         {
             amountBoughtView.setTextColor(Color.BLACK);
+            amountBoughtTitle.setTextColor(Color.BLACK);
             amountRemainingView.setTextColor(Color.BLACK);
+            amountRemainingTitle.setTextColor(Color.BLACK);
 
             quantityBoughtView.setText(currentItem.getQuantityBought());
             quantityRemainingView.setText(currentItem.getQuantityRemaining());
+
+
             quantityBoughtView.setTextColor(Color.GRAY);
+            quantityBoughtTitle.setTextColor(Color.GRAY);
             quantityRemainingView.setTextColor(Color.GRAY);
+            quantityRemainingTitle.setTextColor(Color.GRAY);
 
             amountBoughtView.setText(currentItem.getAmountBought());
             amountRemainingView.setText(currentItem.getAmountRemaining());
@@ -165,9 +179,14 @@ public class ViewFoodCupboardItem extends AppCompatActivity {
         else if (currentItem.getUserInputType().equals("QUANTITY&AMOUNT"))
         {
             amountBoughtView.setTextColor(Color.BLACK);
+            amountBoughtTitle.setTextColor(Color.BLACK);
             amountRemainingView.setTextColor(Color.BLACK);
+            amountRemainingTitle.setTextColor(Color.BLACK);
+
             quantityBoughtView.setTextColor(Color.BLACK);
+            quantityBoughtTitle.setTextColor(Color.BLACK);
             quantityRemainingView.setTextColor(Color.BLACK);
+            quantityRemainingTitle.setTextColor(Color.BLACK);
 
             quantityBoughtView.setText(currentItem.getQuantityBought());
             quantityRemainingView.setText(currentItem.getQuantityRemaining());
@@ -180,12 +199,12 @@ public class ViewFoodCupboardItem extends AppCompatActivity {
         {
             quantityBoughtView.setTextColor(Color.BLACK);
             quantityRemainingView.setTextColor(Color.BLACK);
+
             quantityBoughtView.setText(currentItem.getQuantityBought());
             quantityRemainingView.setText(currentItem.getQuantityRemaining());
-            TextView amountBoughtTitle = (TextView)findViewById(R.id.foodCupboardAmountBought);
+
             amountBoughtTitle.setTextColor(Color.GRAY);
             amountBoughtView.setText("");
-            TextView amountRemainingTitle = (TextView)findViewById(R.id.foodCupboardAmountRemaining);
             amountRemainingTitle.setTextColor(Color.GRAY);
             amountRemainingView.setText("");
 
