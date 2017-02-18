@@ -69,13 +69,22 @@
         <EditText
             android:layout_marginTop="3dp"
             android:layout_marginLeft="20dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/foodCupboardDayExpiryEdit"
             tools:text="day expiry edit "
             android:inputType="date"
             android:textColor="@color/colourBlack"
             android:layout_toRightOf="@id/foodCupboardDayExpiry"/>
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/calendar"
+            android:layout_alignBottom="@+id/foodCupboardDayExpiry"
+            android:layout_toRightOf="@+id/foodCupboardDayExpiryEdit"
+            android:layout_toEndOf="@+id/foodCupboardDayExpiryEdit"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/imageViewCalendar"/>
     </RelativeLayout>
 
     <RelativeLayout

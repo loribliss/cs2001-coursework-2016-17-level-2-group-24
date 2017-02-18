@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -22,7 +23,10 @@ public class EditFoodCupboardItem extends AppCompatActivity {
     private String currentQuantityRemaining;
     private String currentAmountRemaining;
     private String currentUserInputType;
-    private String newUserInputType; //MAY NEED TO INITIALISE EARLIER
+    private String newUserInputType;
+    private String expiryDate;
+    private EditText dayExpiryView;
+    //MAY NEED TO INITIALISE EARLIER
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,7 @@ public class EditFoodCupboardItem extends AppCompatActivity {
         dayBoughtView.setText(currentDayBought, TextView.BufferType.EDITABLE);
 
         String currentDayExpiry = originalItem.getDayExpiry();
-        final EditText dayExpiryView = (EditText) findViewById(R.id.foodCupboardDayExpiryEdit);
+        dayExpiryView = (EditText) findViewById(R.id.foodCupboardDayExpiryEdit);
         dayExpiryView.setText(currentDayExpiry, TextView.BufferType.EDITABLE);
 
         String currentDaysRemaining = originalItem.getDaysRemaining();
@@ -162,6 +166,16 @@ public class EditFoodCupboardItem extends AppCompatActivity {
             }
         });
 
+        ImageView calendarIcon = (ImageView)findViewById(R.id.imageViewCalendar);
+        calendarIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(EditFoodCupboardItem.this, FCSelectExpiryDate.class);
+                startActivityForResult(intent, 1);
+            }
+
+        });
 
 
         //CODE TO DYNAMICALLY UPDATE THE PROGRESS BAR
@@ -273,6 +287,16 @@ public class EditFoodCupboardItem extends AppCompatActivity {
             }
         }
         );
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1)
+        {
+            if (resultCode == RESULT_OK)
+            {
+                expiryDate = data.getStringExtra("newExpiryDate");
+                dayExpiryView.setText(expiryDate);
+            }
+        }
     }
     private boolean containsCharacters(String s)
     {
