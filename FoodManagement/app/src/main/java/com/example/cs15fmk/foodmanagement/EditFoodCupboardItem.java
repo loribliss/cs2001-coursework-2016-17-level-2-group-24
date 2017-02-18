@@ -25,6 +25,7 @@ public class EditFoodCupboardItem extends AppCompatActivity {
     private String currentUserInputType;
     private String newUserInputType;
     private String expiryDate;
+    private String currentDayBought;
     private EditText dayExpiryView;
     //MAY NEED TO INITIALISE EARLIER
 
@@ -39,7 +40,7 @@ public class EditFoodCupboardItem extends AppCompatActivity {
         final EditText nameView = (EditText) findViewById(R.id.foodCupboardNameEdit);
         nameView.setText(currentName, TextView.BufferType.EDITABLE);
 
-        String currentDayBought = originalItem.getDayBought();
+        currentDayBought = originalItem.getDayBought();
         final EditText dayBoughtView = (EditText) findViewById(R.id.foodCupboardDayBoughtEdit);
         dayBoughtView.setText(currentDayBought, TextView.BufferType.EDITABLE);
 
@@ -172,6 +173,8 @@ public class EditFoodCupboardItem extends AppCompatActivity {
             public void onClick(View view)
             {
                 Intent intent = new Intent(EditFoodCupboardItem.this, FCSelectExpiryDate.class);
+                intent.putExtra("boughtDate", currentDayBought);
+                intent.putExtra("expiryDate", currentDayExpiry);
                 startActivityForResult(intent, 1);
             }
 
