@@ -173,6 +173,7 @@ public class EditFoodCupboardItem extends AppCompatActivity {
             public void onClick(View view)
             {
                 Intent intent = new Intent(EditFoodCupboardItem.this, FCSelectExpiryDate.class);
+                intent.putExtra("requestType", "EDIT");
                 intent.putExtra("boughtDate", currentDayBought);
                 intent.putExtra("expiryDate", currentDayExpiry);
                 startActivityForResult(intent, 1);

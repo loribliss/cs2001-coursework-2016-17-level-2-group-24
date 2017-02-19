@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,9 @@ import static android.view.View.Z;
 public class AddFoodCupboardItemManual extends AppCompatActivity {
 
     private String currentUserInputType;
+    private EditText newDayExpiryView;
+    private String dayExpiry;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,8 @@ public class AddFoodCupboardItemManual extends AppCompatActivity {
         EditText daysRemainingView = (EditText)findViewById(R.id.newFCDaysRemaining);
         daysRemainingView.setText("5");
 
+        newDayExpiryView = (EditText) findViewById(R.id.newFCDayExpiry);
+
         TextView hintView = (TextView)findViewById(R.id.newFCHintBox);
         EditText quantityView = (EditText)findViewById(R.id.newFCQuantityBought);
         EditText amountView = (EditText)findViewById(R.id.newFCAmountBought);
@@ -55,6 +61,18 @@ public class AddFoodCupboardItemManual extends AppCompatActivity {
         //error checking - e.g. day expiry must be valid calendar date!!!!!!
         //restoring defaults
 
+        ImageView calendarIcon = (ImageView)findViewById(R.id.imageViewCalendarNew);
+        calendarIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(AddFoodCupboardItemManual.this, FCSelectExpiryDate.class);
+                intent.putExtra("requestType","NEW");
+                intent.putExtra("boughtDate", todaysDate);
+                startActivityForResult(intent, 1);
+            }
+
+        });
 
         quantityOption.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,8 +138,7 @@ public class AddFoodCupboardItemManual extends AppCompatActivity {
                 EditText newNameView = (EditText) findViewById(R.id.newFCName);
                 String name = newNameView.getText().toString();
 
-                EditText newDayExpiryView = (EditText) findViewById(R.id.newFCDayExpiry);
-                String dayExpiry = newDayExpiryView.getText().toString();
+                dayExpiry = newDayExpiryView.getText().toString();
 
                 String quantityBoughtString = quantityView.getText().toString();
 
@@ -207,4 +224,16 @@ public class AddFoodCupboardItemManual extends AppCompatActivity {
         }
         return true;
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1)
+        {
+            if (resultCode == RESULT_OK)
+            {
+                dayExpiry = data.getStringExtra("newExpiryDate");
+                newDayExpiryView.setText(dayExpiry);
+            }
+        }
+    }
+
 }
