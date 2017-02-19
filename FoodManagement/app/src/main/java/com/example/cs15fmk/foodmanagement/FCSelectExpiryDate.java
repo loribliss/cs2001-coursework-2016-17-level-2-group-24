@@ -32,7 +32,7 @@ public class FCSelectExpiryDate extends AppCompatActivity {
         //NEED TO GET THE DAY BOUGHT AND PASS THIS AS THE MINIMUM DATE
 
         dateBought = getIntent().getStringExtra("boughtDate");
-        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yy"); //MAY NEED TO BE 2017 AS LATER THE DATE IS RETURNED AS 2017 INSTEAD BY THE DATECHANGED METHOD
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy"); //MAY NEED TO BE 2017 AS LATER THE DATE IS RETURNED AS 2017 INSTEAD BY THE DATECHANGED METHOD
         try
         {
             Date d = f.parse(dateBought);
@@ -45,10 +45,40 @@ public class FCSelectExpiryDate extends AppCompatActivity {
         datePicker.setMinDate(milliseconds);
 
         expiryDate = getIntent().getStringExtra("expiryDate");
-        //ADD IN CONVERSION OF THE CURRENT EXPIRY DATE ONTO THE CALENDAR SO TAHT IT STARTS ON THAT DATE
-        //REMOVE / AND THEN CHECK FIRST AND THIRD CHARACTER, IF 0 THEN REMOVE AND THEN PARSE THE RESULT
-        
-        datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
+        //CONVERSION OF THE CURRENT EXPIRY DATE ONTO THE CALENDAR SO TAHT IT STARTS ON THAT DATE
+
+		String newDate = "";
+
+		newDate = expiryDate.substring(0, 2) + expiryDate.substring(3, 5) + expiryDate.substring(6, expiryDate.length());
+
+		int day;
+		int month;
+		int year;
+
+		if (newDate.charAt(0) == '0')
+		{
+			day = Integer.parseInt(newDate.substring(1,2));
+		}
+		else
+		{
+			day = Integer.parseInt(newDate.substring(0, 2));
+		}
+		System.out.println(day);
+
+		if (newDate.charAt(2) == '0')
+		{
+			month = Integer.parseInt(newDate.substring(3,4));
+		}
+		else
+		{
+			month = Integer.parseInt(newDate.substring(2, 4));
+		}
+		year = Integer.parseInt(newDate.substring(4, newDate.length()));
+
+
+        //old init method datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
+
+        datePicker.init(year, month-1, day, new DatePicker.OnDateChangedListener() {
 
             @Override
             public void onDateChanged(DatePicker datePicker, int year, int month, int dayOfMonth)

@@ -41,18 +41,18 @@ public class FoodCupboardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_food_cupboard, container, false);
         activity = getActivity();
 
-        cupboardItems.add(new FoodCupboardItem("Chicken", "31/01/17", "07/02/17", "8", "AMOUNT", "1", "1", "400", "300"));
-        cupboardItems.add(new FoodCupboardItem("Bread", "21/01/17", "08/02/17", "6", "QUANTITY", "12", "6","0", "0"));
-        cupboardItems.add(new FoodCupboardItem("Cereal", "11/01/17", "09/02/17", "30", "AMOUNT", "1","1", "750", "50"));
-        cupboardItems.add(new FoodCupboardItem("Beef", "01/01/17", "10/02/17", "5", "QUANTITY&AMOUNT", "3","1","1000","450"));
-        cupboardItems.add(new FoodCupboardItem("Milk", "01/01/17", "10/02/17", "5", "AMOUNT", "1","1","2000", "500"));
-        cupboardItems.add(new FoodCupboardItem("Wholemeal Rolls", "01/01/17", "10/02/17", "2","QUANTITY","4","2","0","0"));
-        cupboardItems.add(new FoodCupboardItem("Turkey rashers", "01/01/17", "10/02/17", "14", "AMOUNT", "1", "1","8","2"));
-        cupboardItems.add(new FoodCupboardItem("Eggs", "01/01/17", "10/02/17", "16", "QUANTITY&AMOUNT", "2", "2", "12", "6"));
-        cupboardItems.add(new FoodCupboardItem("Beef", "01/01/17", "10/02/17", "5", "QUANTITY&AMOUNT", "3","1","1000","450"));
-        cupboardItems.add(new FoodCupboardItem("Milk", "01/01/17", "10/02/17", "5", "AMOUNT", "1","1","2000", "500"));
-        cupboardItems.add(new FoodCupboardItem("Wholemeal Rolls", "01/01/17", "10/02/17", "2","QUANTITY","4","2","0","0"));
-        cupboardItems.add(new FoodCupboardItem("Turkey rashers", "01/01/17", "10/02/17", "14", "AMOUNT", "1", "1","8","2"));
+        cupboardItems.add(new FoodCupboardItem("Chicken", "31/01/2017", "07/02/2017", "8", "AMOUNT", "1", "1", "400", "300"));
+        cupboardItems.add(new FoodCupboardItem("Bread", "21/01/2017", "08/02/2017", "6", "QUANTITY", "12", "6","0", "0"));
+        cupboardItems.add(new FoodCupboardItem("Cereal", "11/01/2017", "09/02/2017", "30", "AMOUNT", "1","1", "750", "50"));
+        cupboardItems.add(new FoodCupboardItem("Beef", "01/01/2017", "27/02/2017", "5", "QUANTITY&AMOUNT", "3","1","1000","450"));
+        cupboardItems.add(new FoodCupboardItem("Milk", "05/01/2017", "10/03/2017", "5", "AMOUNT", "1","1","2000", "500"));
+        cupboardItems.add(new FoodCupboardItem("Wholemeal Rolls", "15/12/2016", "15/03/2017", "2","QUANTITY","4","2","0","0"));
+        cupboardItems.add(new FoodCupboardItem("Turkey rashers", "11/01/2017", "26/02/2017", "14", "AMOUNT", "1", "1","8","2"));
+        cupboardItems.add(new FoodCupboardItem("Eggs", "18/02/2017", "01/03/2017", "16", "QUANTITY&AMOUNT", "2", "2", "12", "6"));
+        cupboardItems.add(new FoodCupboardItem("Beef", "01/01/2017", "28/02/2017", "5", "QUANTITY&AMOUNT", "3","1","1000","450"));
+        cupboardItems.add(new FoodCupboardItem("Milk", "01/01/2017", "24/02/2017", "5", "AMOUNT", "1","1","2000", "500"));
+        cupboardItems.add(new FoodCupboardItem("Wholemeal Rolls", "23/01/2017", "03/03/2017", "2","QUANTITY","4","2","0","0"));
+        cupboardItems.add(new FoodCupboardItem("Turkey rashers", "07/02/2017", "10/03/2017", "14", "AMOUNT", "1", "1","8","2"));
 
         adapter = new CupboardItemAdapter (activity, cupboardItems);
         gridView = (GridView) view.findViewById(R.id.grid_cupboard);
