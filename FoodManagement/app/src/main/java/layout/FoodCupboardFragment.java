@@ -109,16 +109,19 @@ public class FoodCupboardFragment extends Fragment {
 
                 if (data.getStringExtra("Edit").equals("yes"))
                 {
-                    //edit functionality, also need to beware finish functionalitym could set position as specific text e.g. none, edit to indicate intention
+                    FoodCupboardItem editedItem = data.getParcelableExtra("updatedItem");
+                    cupboardItems.set(pos, editedItem);
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(activity, "You have just updated " + cupboardItems.get(pos).getName(), Toast.LENGTH_SHORT).show();
+
+                    //COMPLETE NEXT!
+                    //edit functionality, also need to beware finish functionality could set position as specific text e.g. none, edit to indicate intention
                     /* cupboardItems.get(pos).setName(data.getStringExtra("updatedName"));
                     cupboardItems.get(pos).setDayBought(data.getStringExtra("updatedDayBought"));
                     cupboardItems.get(pos).setDayExpiry(data.getStringExtra("updatedDayExpiry"));
                     cupboardItems.get(pos).setAmountBought(Integer.valueOf(data.getStringExtra("updatedAmountBought")));
                     cupboardItems.get(pos).setAmountRemanining(Integer.valueOf(data.getStringExtra("updatedAmountRemaining")));
-
-                    Toast.makeText(activity, "You have just updated " + cupboardItems.get(pos).getName(), Toast.LENGTH_SHORT).show();
-
-                    adapter.notifyDataSetChanged(); */
+                     */
                 }
 
                 else

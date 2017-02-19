@@ -160,7 +160,7 @@ public class AddFoodCupboardItemManual extends AppCompatActivity {
 
                         if (checkName == false | checkDayExpiry == false | checkQuantityBought == false)
                         {
-                            Toast.makeText(AddFoodCupboardItemManual.this, "One or entries are incomplete", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddFoodCupboardItemManual.this, "One or more entries are incomplete", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
