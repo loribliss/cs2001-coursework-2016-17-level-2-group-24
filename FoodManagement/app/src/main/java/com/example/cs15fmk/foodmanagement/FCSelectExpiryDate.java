@@ -28,22 +28,21 @@ public class FCSelectExpiryDate extends AppCompatActivity {
         calendar.setTimeInMillis(System.currentTimeMillis());
 
         //NEED TO GET THE DAY BOUGHT AND PASS THIS AS THE MINIMUM DATE
+        String dateBought = getIntent().getStringExtra("boughtDate");
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy"); //MAY NEED TO BE 2017 AS LATER THE DATE IS RETURNED AS 2017 INSTEAD BY THE DATECHANGED METHOD
+        try
+        {
+            Date d = f.parse(dateBought);
+            milliseconds = d.getTime();
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+        datePicker.setMinDate(milliseconds);
 
         if (getIntent().getStringExtra("requestType").equals("EDIT"))
         {
-            String dateBought = getIntent().getStringExtra("boughtDate");
-            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy"); //MAY NEED TO BE 2017 AS LATER THE DATE IS RETURNED AS 2017 INSTEAD BY THE DATECHANGED METHOD
-            try
-            {
-                Date d = f.parse(dateBought);
-                milliseconds = d.getTime();
-            }
-            catch (ParseException e)
-            {
-                e.printStackTrace();
-            }
-            datePicker.setMinDate(milliseconds);
-
             expiryDate = getIntent().getStringExtra("expiryDate");
             //CONVERSION OF THE CURRENT EXPIRY DATE ONTO THE CALENDAR SO TAHT IT STARTS ON THAT DATE
 
@@ -108,19 +107,6 @@ public class FCSelectExpiryDate extends AppCompatActivity {
 
         else if (getIntent().getStringExtra("requestType").equals("NEW"))
         {
-            String dateBought = getIntent().getStringExtra("boughtDate");
-            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy"); //MAY NEED TO BE 2017 AS LATER THE DATE IS RETURNED AS 2017 INSTEAD BY THE DATECHANGED METHOD
-            try
-            {
-                Date d = f.parse(dateBought);
-                milliseconds = d.getTime();
-            }
-            catch (ParseException e)
-            {
-                e.printStackTrace();
-            }
-            datePicker.setMinDate(milliseconds);
-
             datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() { //set first date today's date
                 @Override
                 public void onDateChanged(DatePicker datePicker, int year, int month, int dayOfMonth)
