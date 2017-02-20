@@ -284,9 +284,9 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
     }
 
     public void onStop() {
+        super.onStop();
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
-            super.onStop();
         }
     }
 

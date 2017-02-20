@@ -30,7 +30,7 @@
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:id="@+id/textClock2"
+        android:id="@+id/timescale"
         android:layout_weight="0.05" />
 
     <SearchView
@@ -39,7 +39,7 @@
         android:inputType="textPersonName"
         android:text="Ingredients to cook with"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/foodTypes"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textColor="@android:color/black" />
@@ -51,7 +51,7 @@
         android:layout_height="100dp"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/ingredients"
         android:layout_weight="0.05" />
 
     <EditText
@@ -70,7 +70,7 @@
         android:text="Search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/autoCompleteTextView"
+        android:id="@+id/cuisineSearch"
         android:textColor="@android:color/black"
         android:textAlignment="center" />
 
@@ -78,7 +78,7 @@
         android:text="Okay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button3" />
+        android:id="@+id/okay" />
 
 
 </LinearLayout>
