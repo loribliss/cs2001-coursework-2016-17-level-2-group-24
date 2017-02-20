@@ -246,7 +246,7 @@ public class AddFoodCupboardItemManual extends AppCompatActivity {
             {
                 dayExpiry = data.getStringExtra("newExpiryDate");
                 newDayExpiryView.setText(dayExpiry);
-                autoDaysRemaining = DaysRemainingAlgorithm.getDaysRemaining(todaysDate,dayExpiry);
+                autoDaysRemaining = 1 + DaysRemainingAlgorithm.getDaysRemaining(todaysDate,dayExpiry); // 1+ TO INCLUDE THE DAY OF EXPIRY
                 daysRemainingView.setText("Days Remaining: " + String.valueOf(autoDaysRemaining));
             }
         }
