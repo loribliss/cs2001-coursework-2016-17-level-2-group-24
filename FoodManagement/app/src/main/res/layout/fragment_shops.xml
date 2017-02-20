@@ -51,13 +51,15 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:id="@+id/shopDistance" />
 
-            <TextView
+            <RatingBar
                 android:id="@+id/shopRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:text="Rating"
-                android:textSize="16sp" />
+                style="?android:attr/ratingBarStyleSmall"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:isIndicator="true" />
 
             <TextView
                 android:id="@+id/shopPrice"

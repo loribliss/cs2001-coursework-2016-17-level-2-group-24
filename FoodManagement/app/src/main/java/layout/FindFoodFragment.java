@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -25,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +40,6 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStates;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceLikelihood;
 import com.google.android.gms.location.places.PlaceLikelihoodBuffer;
 import com.google.android.gms.location.places.Places;
@@ -59,12 +58,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.R.attr.key;
-import static android.R.attr.value;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static android.support.v7.widget.AppCompatDrawableManager.get;
 import static com.example.cs15fmk.foodmanagement.R.id.navigation;
-import static java.lang.Thread.State.WAITING;
 
 public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -115,8 +109,8 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
         /* Listen for click for Floating action button*/
         FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.FabCurrentLocation);
         fab.setOnClickListener(this);
-
-        //radius(v);
+//check when user click on textfield
+        radius(v);
 
 
         return v;
@@ -364,7 +358,8 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
             Circle circle = mGoogleMap.addCircle(new CircleOptions()
                     .center(mLatLng)
                     .radius(radius)
-                    .strokeColor(Color.BLACK));
+                    .fillColor(Color.parseColor("#332196F3"))
+                    .strokeColor(1));
 
         } else if (v.getId() == navigation) {
             onClickMap(mLatLng);
@@ -404,17 +399,17 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
                             float mShopRating = likelyPlaces.get(i).getPlace().getRating();
 
                             mLatLng = likelyPlaces.get(i).getPlace().getLatLng();
-
-                            if (i == 5) {
+                            Log.d(TAG, "Shop name " + mShopName);
+                            Log.d(TAG, "Shop Address " + mShopAddress);
+                            Log.d(TAG, "Shop price level " + mShopPriceLevel);
+                            Log.d(TAG, "Shop Rating " + mShopRating + "\n");
+                            if (i == 1) {
                                 arrayName.add(mShopName);
                                 arrayAddress.add(mShopAddress);
                                 arrayPrice.add(mShopPriceLevel);
                                 arrayRating.add(mShopRating);
                                 arrayLatLng.add(mLatLng);
-                                Log.d(TAG, "Shop name " + mShopName);
-                                Log.d(TAG, "Shop Address " + mShopAddress);
-                                Log.d(TAG, "Shop price level " + mShopPriceLevel);
-                                Log.d(TAG, "Shop Rating " + mShopRating);
+
                                 slideUpPanelData();
 
                             }
@@ -431,16 +426,25 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
     }
 
     public void slideUpPanelData() {
+        String pound = "\u00a3";
         for (int i = 0; i < arrayName.size(); i++) {
             asd = (TextView) getView().findViewById(R.id.shopName);
             asd.setText(arrayName.get(i));
             asd = (TextView) getView().findViewById(R.id.shopAddress);
             asd.setText(arrayAddress.get(i));
-            asd = (TextView) getView().findViewById(R.id.shopRating);
-            asd.setText(arrayRating.get(i).toString());
-            /*asd = (TextView) getView().findViewById(R.id.shopPrice);
-            asd.setText(arrayPrice.get(i));
-            asd = (TextView) getView().findViewById(R.id.shopDistance);
+            RatingBar saasd = (RatingBar) getView().findViewById(R.id.shopRating);
+            saasd.setRating(arrayRating.get(i));
+if(mShopPriceLevel>0) {
+    asd = (TextView) getView().findViewById(R.id.shopPrice);
+    String multiLineText = "\u00a3";
+    multiLineText = new String(new char[arrayPrice.get(i)]).replace("\0", pound);
+    asd.setText(multiLineText);
+}
+            else
+{
+    asd.setText("");
+}
+           /* asd = (TextView) getView().findViewById(R.id.shopDistance);
             asd.setText(arrayLatLng.get(i).toString());
             https://developers.google.com/maps/documentation/distance-matrix/intro*/
 
@@ -469,62 +473,57 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
     public void radius(View v) {
 
         EditText radius = (EditText) v.findViewById(R.id.radius);
-
-        Log.d(TAG, "text lis");
-
         radius.addTextChangedListener(new TextWatcher() {
             @Override
-            public void afterTextChanged(Editable s) {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+
                 // TODO Auto-generated method stub
-                if (s.length() == 1) {
-                    Log.d(TAG, "length:  " + s.length());
-                    Log.d(TAG, "length radius :  " + radius.length());
-                    radius.setText(" mile");
-                    String apple;
-                    apple = radius.getText().toString();
-                    String[] part = apple.split("(?=\\d)(?<=\\D)");
-                    Log.d(TAG, "part 0  :  " + part[0]);
-                    //Log.d(TAG, "part 1 :  " + part[1]);
-                    apple.split("(?=\\d)");
-                    //value = Integer.parseInt(apple);
-                    Log.d(TAG, "apple :  " + apple);
-                    Log.d(TAG, "asde :  " + value);
-                }
             }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
 
+                // TODO Auto-generated method stub
             }
 
             @Override
-            /*works weirdly* need to be fixed*/
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
+            public void afterTextChanged(Editable s) {
+                if(s.length() ==1){
+                    Log.d(TAG, "WAITING"  + s.length());
+                    radius.setText(" mile");
+                }
+                // TODO Auto-generated method stub
             }
         });
-
-        radius.setOnKeyListener(new View.OnKeyListener() {
+radius.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 Log.d(TAG, "WAITING");
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode) == KeyEvent.KEYCODE_ENTER) {
-                    // Toast.makeText(mContext,"" , Toast.LENGTH_LONG).show();
+                    String radiusText  = radius.getText().toString();
+                     Toast.makeText(mContext, radiusText, Toast.LENGTH_LONG).show();
 
+                    Log.d(TAG, "problem " + radiusText);
+                    String[] part = radiusText.split("(?<=\\D)(?=\\d)");
+                    String you = (part[0].toString());
+                    //int mo = Integer.parseInt(part[1]);
+                    Log.d(TAG, "part 0  :  " + you);
+                    Log.d(TAG, "part 1 :  " + you.length());
+                    value = Integer.parseInt(you.substring(0, you.length()-5));
+                    Log.d(TAG, "part 5 :  " + value);
                     drawCircle();
-                    Log.d(TAG, "problem " + radius.getText().toString());
-                    Log.d(TAG, "problem2 " + value);
+
                     return true;
 
 
                 }
 
-                return false;
-            }
-        });
+
+                return false;}
+            });
     }
 
     public void drawCircle() {
@@ -546,14 +545,9 @@ public class FindFoodFragment extends Fragment implements OnMapReadyCallback,
         Circle circle = mGoogleMap.addCircle(new CircleOptions()
                 .center(mLatLng)
                 .radius(value)
-                .strokeColor(Color.BLUE));
+                .fillColor(Color.parseColor("#332196F3"))
+        .strokeColor(1));
         Log.d(TAG, mLatLng + "ADDD");
     }
 }
-
-
-
-
-
-
 
