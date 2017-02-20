@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +28,13 @@ import static android.view.View.Z;
 
 public class AddFoodCupboardItemManual extends AppCompatActivity {
 
-    private String currentUserInputType;
+    private String currentUserInputType ="";
+    private EditText newDayExpiryView;
+    private String dayExpiry;
+    private int autoDaysRemaining = 0;
+    private EditText daysRemainingView;
+    private String todaysDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +42,15 @@ public class AddFoodCupboardItemManual extends AppCompatActivity {
 
         Date date = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        final String todaysDate = formatter.format(date);
+        todaysDate = formatter.format(date);
 
         EditText newDayBoughtView = (EditText) findViewById(R.id.newFCDayBought);
         newDayBoughtView.setText(todaysDate);
 
-        EditText daysRemainingView = (EditText)findViewById(R.id.newFCDaysRemaining);
-        daysRemainingView.setText("5");
+        daysRemainingView = (EditText)findViewById(R.id.newFCDaysRemaining);
+        daysRemainingView.setText(String.valueOf("Days Remaining: " + autoDaysRemaining));
+
+        newDayExpiryView = (EditText) findViewById(R.id.newFCDayExpiry);
 
         TextView hintView = (TextView)findViewById(R.id.newFCHintBox);
         EditText quantityView = (EditText)findViewById(R.id.newFCQuantityBought);
@@ -55,6 +64,18 @@ public class AddFoodCupboardItemManual extends AppCompatActivity {
         //error checking - e.g. day expiry must be valid calendar date!!!!!!
         //restoring defaults
 
+        ImageView calendarIcon = (ImageView)findViewById(R.id.imageViewCalendarNew);
+        calendarIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(AddFoodCupboardItemManual.this, FCSelectExpiryDate.class);
+                intent.putExtra("requestType","NEW");
+                intent.putExtra("boughtDate", todaysDate);
+                startActivityForResult(intent, 1);
+            }
+
+        });
 
         quantityOption.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,80 +138,90 @@ public class AddFoodCupboardItemManual extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                EditText newNameView = (EditText) findViewById(R.id.newFCName);
-                String name = newNameView.getText().toString();
-
-                EditText newDayExpiryView = (EditText) findViewById(R.id.newFCDayExpiry);
-                String dayExpiry = newDayExpiryView.getText().toString();
-
-                String quantityBoughtString = quantityView.getText().toString();
-
-                String amountBoughtString = amountView.getText().toString();
-
-
-                if (currentUserInputType.equals("QUANTITY")) //"5" FOR DAYS REMAINING NEEDS CHANGING
+                if (currentUserInputType.isEmpty())
                 {
-                    boolean checkName = checkEntry(newNameView, name, "name");
-                    boolean checkDayExpiry = checkEntry(newDayExpiryView, dayExpiry, "Day Expiry");
-                    boolean checkQuantityBought = checkEntry(quantityView, quantityBoughtString, "Quantity Bought");
-
-                    if (checkName == false | checkDayExpiry == false | checkQuantityBought == false)
-                    {
-                        Toast.makeText(AddFoodCupboardItemManual.this, "One or entries are incomplete", Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
-                        Intent data = new Intent();
-                        FoodCupboardItem newItem = new FoodCupboardItem(name,todaysDate,dayExpiry,"5",currentUserInputType,quantityBoughtString,quantityBoughtString,
-                                "0","0");
-                        data.putExtra("newItem",newItem);
-                        //data.putExtra("new_FC_Name",name);
-                        //data.putExtra("new_FC_DayBought", todaysDate);
-                        //data.putExtra("new_FC_DayExpiry",dayExpiry);
-                        //data.putExtra("new_FC_AmountBought", amountBoughtString);
-                        setResult(RESULT_OK, data);
-                        finish();
-                    }
-                }
-                else if (currentUserInputType.equals("AMOUNT"))
-                {
-                    boolean checkName = checkEntry(newNameView, name, "name");
-                    boolean checkDayExpiry = checkEntry(newDayExpiryView, dayExpiry, "Day Expiry");
-                    boolean checkAmountBought = checkEntry(amountView, amountBoughtString, "Amount Bought");
-
-                    if (checkName == false | checkDayExpiry == false | checkAmountBought == false)
-                    {
-                        Toast.makeText(AddFoodCupboardItemManual.this, "One or entries are incomplete", Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
-                        Intent data = new Intent();
-                        FoodCupboardItem newItem = new FoodCupboardItem(name,todaysDate,dayExpiry,"5",currentUserInputType,"1","1",
-                                amountBoughtString,amountBoughtString);
-                        data.putExtra("newItem",newItem);
-                        setResult(RESULT_OK, data);
-                        finish();
-                    }
+                    hintView.setText("Hint: Please select one of the above options!");
+                    hintView.setTextColor(Color.RED);
                 }
                 else
                 {
-                    boolean checkName = checkEntry(newNameView, name, "name");
-                    boolean checkDayExpiry = checkEntry(newDayExpiryView, dayExpiry, "Day Expiry");
-                    boolean checkQuantityBought = checkEntry(quantityView, quantityBoughtString, "Quantity Bought");
-                    boolean checkAmountBought = checkEntry(amountView, amountBoughtString, "Amount Bought");
+                    EditText newNameView = (EditText) findViewById(R.id.newFCName);
+                    String name = newNameView.getText().toString();
 
-                    if (checkName == false | checkDayExpiry == false | checkQuantityBought == false | checkAmountBought == false)
+                    dayExpiry = newDayExpiryView.getText().toString();
+
+                    String quantityBoughtString = quantityView.getText().toString();
+
+                    String amountBoughtString = amountView.getText().toString();
+
+
+                    if (currentUserInputType.equals("QUANTITY")) //"5" FOR DAYS REMAINING NEEDS CHANGING
                     {
-                        Toast.makeText(AddFoodCupboardItemManual.this, "One or entries are incomplete", Toast.LENGTH_SHORT).show();
+                        boolean checkName = checkEntry(newNameView, name, "name");
+                        boolean checkDayExpiry = checkEntry(newDayExpiryView, dayExpiry, "Day Expiry");
+                        boolean checkQuantityBought = checkEntry(quantityView, quantityBoughtString, "Quantity Bought");
+
+                        if (checkName == false | checkDayExpiry == false | checkQuantityBought == false)
+                        {
+                            Toast.makeText(AddFoodCupboardItemManual.this, "One or more entries are incomplete", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            String daysRemaining = String.valueOf(DaysRemainingAlgorithm.getDaysRemaining(todaysDate,dayExpiry));
+                            Intent data = new Intent();
+                            FoodCupboardItem newItem = new FoodCupboardItem(name,todaysDate,dayExpiry,daysRemaining,currentUserInputType,quantityBoughtString,quantityBoughtString,
+                                    "0","0");
+                            data.putExtra("newItem",newItem);
+                            //data.putExtra("new_FC_Name",name);
+                            //data.putExtra("new_FC_DayBought", todaysDate);
+                            //data.putExtra("new_FC_DayExpiry",dayExpiry);
+                            //data.putExtra("new_FC_AmountBought", amountBoughtString);
+                            setResult(RESULT_OK, data);
+                            finish();
+                        }
+                    }
+                    else if (currentUserInputType.equals("AMOUNT"))
+                    {
+                        boolean checkName = checkEntry(newNameView, name, "name");
+                        boolean checkDayExpiry = checkEntry(newDayExpiryView, dayExpiry, "Day Expiry");
+                        boolean checkAmountBought = checkEntry(amountView, amountBoughtString, "Amount Bought");
+
+                        if (checkName == false | checkDayExpiry == false | checkAmountBought == false)
+                        {
+                            Toast.makeText(AddFoodCupboardItemManual.this, "One or entries are incomplete", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            String daysRemaining = String.valueOf(DaysRemainingAlgorithm.getDaysRemaining(todaysDate,dayExpiry));
+                            Intent data = new Intent();
+                            FoodCupboardItem newItem = new FoodCupboardItem(name,todaysDate,dayExpiry,daysRemaining,currentUserInputType,"1","1",
+                                    amountBoughtString,amountBoughtString);
+                            data.putExtra("newItem",newItem);
+                            setResult(RESULT_OK, data);
+                            finish();
+                        }
                     }
                     else
                     {
-                        Intent data = new Intent();
-                        FoodCupboardItem newItem = new FoodCupboardItem(name,todaysDate,dayExpiry,"5",currentUserInputType,quantityBoughtString,quantityBoughtString,
-                                amountBoughtString,amountBoughtString);
-                        data.putExtra("newItem",newItem);
-                        setResult(RESULT_OK, data);
-                        finish();
+                        boolean checkName = checkEntry(newNameView, name, "name");
+                        boolean checkDayExpiry = checkEntry(newDayExpiryView, dayExpiry, "Day Expiry");
+                        boolean checkQuantityBought = checkEntry(quantityView, quantityBoughtString, "Quantity Bought");
+                        boolean checkAmountBought = checkEntry(amountView, amountBoughtString, "Amount Bought");
+
+                        if (checkName == false | checkDayExpiry == false | checkQuantityBought == false | checkAmountBought == false)
+                        {
+                            Toast.makeText(AddFoodCupboardItemManual.this, "One or entries are incomplete", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            String daysRemaining = String.valueOf(DaysRemainingAlgorithm.getDaysRemaining(todaysDate,dayExpiry));
+                            Intent data = new Intent();
+                            FoodCupboardItem newItem = new FoodCupboardItem(name,todaysDate,dayExpiry,daysRemaining,currentUserInputType,quantityBoughtString,quantityBoughtString,
+                                    amountBoughtString,amountBoughtString);
+                            data.putExtra("newItem",newItem);
+                            setResult(RESULT_OK, data);
+                            finish();
+                        }
                     }
                 }
                 //add radio option pane maybe - could influence a draggable progress bar to set how much bought
@@ -207,4 +238,18 @@ public class AddFoodCupboardItemManual extends AppCompatActivity {
         }
         return true;
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1)
+        {
+            if (resultCode == RESULT_OK)
+            {
+                dayExpiry = data.getStringExtra("newExpiryDate");
+                newDayExpiryView.setText(dayExpiry);
+                autoDaysRemaining = DaysRemainingAlgorithm.getDaysRemaining(todaysDate,dayExpiry);
+                daysRemainingView.setText("Days Remaining: " + String.valueOf(autoDaysRemaining));
+            }
+        }
+    }
+
 }

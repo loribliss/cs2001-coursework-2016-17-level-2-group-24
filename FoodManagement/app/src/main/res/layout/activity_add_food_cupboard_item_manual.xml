@@ -25,12 +25,26 @@
         android:hint="Day Bought"
         android:focusable="false"
         />
-    <EditText
-        android:id="@+id/newFCDayExpiry"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Day Expiry"
-        android:inputType="date"/>
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/newFCDayExpiry"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:hint="Day Expiry"
+            android:inputType="date"/>
+        <ImageView
+            android:layout_marginTop="5dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/calendar"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/imageViewCalendarNew"/>
+    </LinearLayout>
+
     <EditText
         android:id="@+id/newFCDaysRemaining"
         android:layout_width="match_parent"

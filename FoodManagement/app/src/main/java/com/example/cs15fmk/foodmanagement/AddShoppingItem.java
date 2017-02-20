@@ -97,7 +97,7 @@ public class AddShoppingItem extends AppCompatActivity {
 
                                               if (checkName == false | checkAmount == false | checkPriority == false)
                                               {
-                                                  Toast.makeText(AddShoppingItem.this, "One or entries are incomplete", Toast.LENGTH_SHORT).show();
+                                                  Toast.makeText(AddShoppingItem.this, "One or more entries are incomplete", Toast.LENGTH_SHORT).show();
                                               }
                                               else
                                               {

@@ -34,19 +34,25 @@
             android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddShoppingItem"
-            android:label="Add New Shopping Item"/>
-        <activity android:name=".EditShoppingItem"
-            android:label="Edit Shopping Item"/>
-        <activity android:name=".AddNewFCItemMenu"
-            android:label="Add New Food Cupboard Item"/>
-        <activity android:name=".AddFoodCupboardItemManual"
-            android:label="Add New Food Cupboard Item"/>
-        <activity android:name=".ViewFoodCupboardItem"
-            android:label="Cupboard Item"/>
-        <activity android:name=".EditFoodCupboardItem"
-            android:label="Edit Food Cupboard Item">
-        </activity>
+        <activity
+            android:name=".AddShoppingItem"
+            android:label="Add New Shopping Item" />
+        <activity
+            android:name=".EditShoppingItem"
+            android:label="Edit Shopping Item" />
+        <activity
+            android:name=".AddNewFCItemMenu"
+            android:label="Add New Food Cupboard Item" />
+        <activity
+            android:name=".AddFoodCupboardItemManual"
+            android:label="Add New Food Cupboard Item" />
+        <activity
+            android:name=".ViewFoodCupboardItem"
+            android:label="Cupboard Item" />
+        <activity
+            android:name=".EditFoodCupboardItem"
+            android:label="Edit Food Cupboard Item"></activity>
+        <activity android:name=".FCSelectExpiryDate"></activity>
     </application>
 
 </manifest>
