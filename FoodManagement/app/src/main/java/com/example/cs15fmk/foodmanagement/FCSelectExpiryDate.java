@@ -43,7 +43,7 @@ public class FCSelectExpiryDate extends AppCompatActivity {
 
         if (getIntent().getStringExtra("requestType").equals("EDIT"))
         {
-            expiryDate = getIntent().getStringExtra("expiryDate");
+            expiryDate = getIntent().getStringExtra("expiryDate"); //edit keeps current expiry date if finished pressed and
             //CONVERSION OF THE CURRENT EXPIRY DATE ONTO THE CALENDAR SO TAHT IT STARTS ON THAT DATE
 
             String newDate = "";
@@ -107,6 +107,8 @@ public class FCSelectExpiryDate extends AppCompatActivity {
 
         else if (getIntent().getStringExtra("requestType").equals("NEW"))
         {
+            expiryDate=dateBought; //NEEDS CHANGING set expiry date with current day if finish pressed without selecting a new date (could use toast message instead)
+
             datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() { //set first date today's date
                 @Override
                 public void onDateChanged(DatePicker datePicker, int year, int month, int dayOfMonth)

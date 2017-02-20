@@ -43,6 +43,7 @@
   <component name="ProjectType">
     <option name="id" value="Android" />
   </component>
+<<<<<<< Updated upstream
   <component name="masterDetails">
     <states>
       <state key="ProjectJDKs.UI">
@@ -59,4 +60,11 @@
       </state>
     </states>
   </component>
+<<<<<<< HEAD
 </project>
+=======
+</project>
+>>>>>>> a112afbb8d9866bc614720ebaa9e8af554c591c5
+=======
+</project>
+>>>>>>> Stashed changes
