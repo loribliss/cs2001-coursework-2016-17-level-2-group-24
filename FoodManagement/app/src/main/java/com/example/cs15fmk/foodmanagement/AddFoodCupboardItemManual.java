@@ -31,6 +31,9 @@ public class AddFoodCupboardItemManual extends AppCompatActivity {
     private String currentUserInputType ="";
     private EditText newDayExpiryView;
     private String dayExpiry;
+    private int autoDaysRemaining = 0;
+    private EditText daysRemainingView;
+    private String todaysDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +42,13 @@ public class AddFoodCupboardItemManual extends AppCompatActivity {
 
         Date date = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        final String todaysDate = formatter.format(date);
+        todaysDate = formatter.format(date);
 
         EditText newDayBoughtView = (EditText) findViewById(R.id.newFCDayBought);
         newDayBoughtView.setText(todaysDate);
 
-        EditText daysRemainingView = (EditText)findViewById(R.id.newFCDaysRemaining);
-        daysRemainingView.setText("5");
+        daysRemainingView = (EditText)findViewById(R.id.newFCDaysRemaining);
+        daysRemainingView.setText(String.valueOf("Days Remaining: " + autoDaysRemaining));
 
         newDayExpiryView = (EditText) findViewById(R.id.newFCDayExpiry);
 
@@ -164,8 +167,9 @@ public class AddFoodCupboardItemManual extends AppCompatActivity {
                         }
                         else
                         {
+                            String daysRemaining = String.valueOf(DaysRemainingAlgorithm.getDaysRemaining(todaysDate,dayExpiry));
                             Intent data = new Intent();
-                            FoodCupboardItem newItem = new FoodCupboardItem(name,todaysDate,dayExpiry,"5",currentUserInputType,quantityBoughtString,quantityBoughtString,
+                            FoodCupboardItem newItem = new FoodCupboardItem(name,todaysDate,dayExpiry,daysRemaining,currentUserInputType,quantityBoughtString,quantityBoughtString,
                                     "0","0");
                             data.putExtra("newItem",newItem);
                             //data.putExtra("new_FC_Name",name);
@@ -188,8 +192,9 @@ public class AddFoodCupboardItemManual extends AppCompatActivity {
                         }
                         else
                         {
+                            String daysRemaining = String.valueOf(DaysRemainingAlgorithm.getDaysRemaining(todaysDate,dayExpiry));
                             Intent data = new Intent();
-                            FoodCupboardItem newItem = new FoodCupboardItem(name,todaysDate,dayExpiry,"5",currentUserInputType,"1","1",
+                            FoodCupboardItem newItem = new FoodCupboardItem(name,todaysDate,dayExpiry,daysRemaining,currentUserInputType,"1","1",
                                     amountBoughtString,amountBoughtString);
                             data.putExtra("newItem",newItem);
                             setResult(RESULT_OK, data);
@@ -209,8 +214,9 @@ public class AddFoodCupboardItemManual extends AppCompatActivity {
                         }
                         else
                         {
+                            String daysRemaining = String.valueOf(DaysRemainingAlgorithm.getDaysRemaining(todaysDate,dayExpiry));
                             Intent data = new Intent();
-                            FoodCupboardItem newItem = new FoodCupboardItem(name,todaysDate,dayExpiry,"5",currentUserInputType,quantityBoughtString,quantityBoughtString,
+                            FoodCupboardItem newItem = new FoodCupboardItem(name,todaysDate,dayExpiry,daysRemaining,currentUserInputType,quantityBoughtString,quantityBoughtString,
                                     amountBoughtString,amountBoughtString);
                             data.putExtra("newItem",newItem);
                             setResult(RESULT_OK, data);
@@ -240,6 +246,8 @@ public class AddFoodCupboardItemManual extends AppCompatActivity {
             {
                 dayExpiry = data.getStringExtra("newExpiryDate");
                 newDayExpiryView.setText(dayExpiry);
+                autoDaysRemaining = DaysRemainingAlgorithm.getDaysRemaining(todaysDate,dayExpiry);
+                daysRemainingView.setText("Days Remaining: " + String.valueOf(autoDaysRemaining));
             }
         }
     }
