@@ -75,7 +75,7 @@ public class SortingAlgorithmsShoppingList {
                 ShoppingListItem one = a.get(i);
                 ShoppingListItem two = a.get(i + 1);
 
-                if (one.getIntItemDateCreated() < two.getIntItemDateCreated()) {
+                if (one.getLongValueItemDateCreated() < two.getLongValueItemDateCreated()) {
                     temp = one;
                     a.set(i, two);
                     a.set(i + 1, temp);

@@ -2,6 +2,10 @@ package com.example.cs15fmk.foodmanagement;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 //This class is the template for shopping list items which will hold values for a name, quantity, priority and a date created (for sorting purposes)
 //Methods are standard get and set methods - however, some may be removed (e.g. modification of date created) as they will be initialised automatically when the objet is created
 // It also implements parcelable to allow for easy transferrance of the shopping list objects between activities
@@ -37,12 +41,23 @@ public class ShoppingListItem implements Parcelable{
         return priority;
     }
     public String getItemDateCreated() {return dateCreated;}
-    public int getIntItemDateCreated() //need to use long millisecond value instead for accuracy
+    public long getLongValueItemDateCreated() //need to use long millisecond value instead for accuracy
     {
-        int date = 0;
-        String tempDateNoSlashes = dateCreated.substring(0, 2) + dateCreated.substring(3, 5) + dateCreated.substring(6, dateCreated.length());;
-        date = Integer.valueOf(tempDateNoSlashes);
-        return date;
+        long milliseconds = 0;
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy"); //MAY NEED TO BE 2017 AS LATER THE DATE IS RETURNED AS 2017 INSTEAD BY THE DATECHANGED METHOD
+        try
+        {
+            Date d = f.parse(dateCreated);
+            milliseconds = d.getTime();
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+        //old method
+        //String tempDateNoSlashes = dateCreated.substring(0, 2) + dateCreated.substring(3, 5) + dateCreated.substring(6, dateCreated.length());;
+        //date = Integer.valueOf(tempDateNoSlashes);
+        return milliseconds;
     }
     public boolean getItemCheckBoxState() { return checkboxState;}
 
