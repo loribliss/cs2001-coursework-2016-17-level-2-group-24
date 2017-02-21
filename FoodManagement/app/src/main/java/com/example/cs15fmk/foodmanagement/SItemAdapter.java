@@ -69,7 +69,7 @@ public class SItemAdapter extends ArrayAdapter<ShoppingListItem> {
             checkBox.setChecked(true);
         }
 
-        try
+        /*try
         {
             ShoppingListItem a = getItem(position+1);
         }
@@ -86,7 +86,7 @@ public class SItemAdapter extends ArrayAdapter<ShoppingListItem> {
             paddingLeftDp = Math.round(16 * scale);
             paddingBottomDp = Math.round(75 * scale);
             listItemView.setPadding(paddingLeftDp,paddingTopDp,paddingRightDp,paddingBottomDp);
-        }
+        } */
 
         return listItemView;
     }

@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -62,13 +64,22 @@ public class ShoppingListFragment extends Fragment {
             }
         }
         );
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount)
+            {
+                if (firstVisibleItem == 0)
+                {
+                    addNewItem.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    addNewItem.setVisibility(View.INVISIBLE);
+                }
+            }
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-
-                Toast.makeText(activity, "Clicked on Row: " + position, Toast.LENGTH_SHORT).show();
-
+            public void onScrollStateChanged(AbsListView view, int scrollState)
+            {
+                addNewItem.setVisibility(View.VISIBLE);
             }
         });
 
