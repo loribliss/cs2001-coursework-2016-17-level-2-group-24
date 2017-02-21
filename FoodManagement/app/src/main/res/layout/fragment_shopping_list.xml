@@ -65,6 +65,14 @@
 
         </LinearLayout>
     </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+        android:id="@+id/shoppinglist"
+        android:orientation="vertical"
+        />
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_new_shopping_item"
         android:layout_width="wrap_content"
@@ -76,12 +84,5 @@
         app:elevation="6dp"
         app:pressedTranslationZ="12dp"
         app:srcCompat="@drawable/ic_add_black_24dp" />
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
-        android:id="@+id/shoppinglist"
-        android:orientation="vertical"
-        />
 
 </FrameLayout>

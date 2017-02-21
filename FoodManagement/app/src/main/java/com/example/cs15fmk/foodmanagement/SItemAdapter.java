@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static android.R.attr.padding;
+
 
 public class SItemAdapter extends ArrayAdapter<ShoppingListItem> {
     public SItemAdapter(Activity context, ArrayList<ShoppingListItem> shoppingitems) {
@@ -65,6 +67,25 @@ public class SItemAdapter extends ArrayAdapter<ShoppingListItem> {
         if (currentItem.getItemCheckBoxState() == true)
         {
             checkBox.setChecked(true);
+        }
+
+        try
+        {
+            ShoppingListItem a = getItem(position+1);
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            int paddingTopDp;
+            int paddingBottomDp;
+            int paddingRightDp;
+            int paddingLeftDp;
+
+            float scale = this.getContext().getResources().getDisplayMetrics().density;
+            paddingTopDp = Math.round(16 * scale);
+            paddingRightDp = Math.round(16 * scale);
+            paddingLeftDp = Math.round(16 * scale);
+            paddingBottomDp = Math.round(75 * scale);
+            listItemView.setPadding(paddingLeftDp,paddingTopDp,paddingRightDp,paddingBottomDp);
         }
 
         return listItemView;
