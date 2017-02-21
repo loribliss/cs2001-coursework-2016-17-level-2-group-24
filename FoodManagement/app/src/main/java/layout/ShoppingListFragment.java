@@ -2,6 +2,7 @@ package layout;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.cs15fmk.foodmanagement.AddShoppingItem;
 import com.example.cs15fmk.foodmanagement.EditShoppingItem;
+import com.example.cs15fmk.foodmanagement.InitialiseShoppingListArray;
 import com.example.cs15fmk.foodmanagement.R;
 import com.example.cs15fmk.foodmanagement.SItemAdapter;
 import com.example.cs15fmk.foodmanagement.ShoppingListItem;
@@ -26,7 +28,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class ShoppingListFragment extends Fragment {
 
-    private final ArrayList<ShoppingListItem> shoppingItems = new ArrayList<>();
+    private ArrayList<ShoppingListItem> shoppingItems = new ArrayList<>();
     private SItemAdapter adapter;
     private ListView listView;
     private Activity activity;
@@ -36,9 +38,7 @@ public class ShoppingListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_shopping_list, container, false);
 
-        shoppingItems.add(new ShoppingListItem("Milk", "2", "High", "16/02/17", false));
-        shoppingItems.add(new ShoppingListItem("Chicken fillets", "1", "Medium", "16/02/17", false));
-        shoppingItems.add(new ShoppingListItem("Bran Flakes", "3", "Low", "16/02/17", false));
+        shoppingItems = InitialiseShoppingListArray.getArray();
 
         activity = getActivity();
         adapter = new SItemAdapter (activity, shoppingItems);
@@ -116,6 +116,7 @@ public class ShoppingListFragment extends Fragment {
                 //String priority = data.getStringExtra("priority");
                 shoppingItems.add(new ShoppingListItem(name, quantity, priority, dateCreated, state));
                 adapter.notifyDataSetChanged();
+                editMasterList();
             }
         }
 
@@ -144,15 +145,26 @@ public class ShoppingListFragment extends Fragment {
                     edit.setItemPrioirty(newPriority);
                     edit.setItemDateCreated(newDateCreated);
                     adapter.notifyDataSetChanged();
+                    editMasterList();
                 }
                 else
                 {
                     Toast.makeText(activity, "You have just deleted " + shoppingItems.get(pos).getItemName(), Toast.LENGTH_SHORT).show();
                     shoppingItems.remove(pos);
                     adapter.notifyDataSetChanged(); //deletion does not change anything permanently if you exit the screen
+                    editMasterList();
                 }
             }
         }
+    }
+    private void editMasterList()
+    {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                InitialiseShoppingListArray.updateArray(shoppingItems);
+            }
+        });
     }
 
 }
