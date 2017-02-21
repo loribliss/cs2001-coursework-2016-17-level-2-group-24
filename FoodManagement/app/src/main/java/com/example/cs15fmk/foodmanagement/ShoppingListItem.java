@@ -31,6 +31,7 @@ public class ShoppingListItem implements Parcelable{
     {
         return quantity;
     }
+    public int getIntItemQuantity(){return Integer.valueOf(quantity);}
     public String getItemPriority()
     {
         return priority;

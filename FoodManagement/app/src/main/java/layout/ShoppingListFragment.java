@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.cs15fmk.foodmanagement.AddShoppingItem;
@@ -21,10 +23,12 @@ import com.example.cs15fmk.foodmanagement.InitialiseShoppingListArray;
 import com.example.cs15fmk.foodmanagement.R;
 import com.example.cs15fmk.foodmanagement.SItemAdapter;
 import com.example.cs15fmk.foodmanagement.ShoppingListItem;
+import com.example.cs15fmk.foodmanagement.SortingAlgorithmsShoppingList;
 
 import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
+import static com.example.cs15fmk.foodmanagement.R.id.spinner;
 
 public class ShoppingListFragment extends Fragment {
 
@@ -32,6 +36,8 @@ public class ShoppingListFragment extends Fragment {
     private SItemAdapter adapter;
     private ListView listView;
     private Activity activity;
+    private Spinner spinner;
+    private static final String[]optionsShoppingListSpinner = {"All", "Alphabetical", "Quantity", "Priority"}; //ADD MOST RECENT
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,16 +67,8 @@ public class ShoppingListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-                //ShoppingListItem a = shoppingItems.get(position);
-                //a.setCheckboxState(true);
                 Toast.makeText(activity, "Clicked on Row: " + position, Toast.LENGTH_SHORT).show();
-                //adapter.notifyDataSetChanged();
 
-                /*CheckBox check = (CheckBox) view.findViewById(R.id.checkbox);
-                if (check.isChecked())
-                {
-                    Toast.makeText(ShoppingList.this, "now it is checked", Toast.LENGTH_SHORT).show();
-                } */
             }
         });
 
@@ -83,6 +81,48 @@ public class ShoppingListFragment extends Fragment {
                 return true;
             }
         });
+        spinner = (Spinner) view.findViewById(R.id.sortByShoppingListSpinner);
+        ArrayAdapter<String> adapterSpinner = new ArrayAdapter<String>(activity,
+                android.R.layout.simple_spinner_item,optionsShoppingListSpinner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapterSpinner);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                if (position == 0)
+                {   //does not go to default...have default as most recent
+                    shoppingItems = InitialiseShoppingListArray.getArray();
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(activity, "You have just selected " + optionsShoppingListSpinner[position], Toast.LENGTH_SHORT).show();
+                }
+                if (position == 1)
+                {
+                    shoppingItems = SortingAlgorithmsShoppingList.sortName(shoppingItems);
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(activity, "You have just selected " + optionsShoppingListSpinner[position], Toast.LENGTH_SHORT).show();
+                }
+                else if (position ==2)
+                {
+                    shoppingItems = SortingAlgorithmsShoppingList.sortQuantity(shoppingItems);
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(activity, "You have just selected " + optionsShoppingListSpinner[position], Toast.LENGTH_SHORT).show();
+                }
+                else if (position ==3)
+                {
+                    shoppingItems = SortingAlgorithmsShoppingList.sortPriority(shoppingItems);
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(activity, "You have just selected " + optionsShoppingListSpinner[position], Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                //empty
+            }
+        });
+
         return view;
     }
 

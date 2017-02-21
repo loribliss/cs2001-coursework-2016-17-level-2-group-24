@@ -35,7 +35,6 @@ public class FoodCupboardFragment extends Fragment {
     private GridView gridView;
     private Spinner spinner;
     private Activity activity;
-
     private static final String[]paths = {"All", "Alphabetical", "Days Left", "item 3"}; //first item is displayed!
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
