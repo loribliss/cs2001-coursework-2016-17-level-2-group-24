@@ -2,6 +2,7 @@ package layout;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 import com.example.cs15fmk.foodmanagement.AddNewFCItemMenu;
 import com.example.cs15fmk.foodmanagement.CupboardItemAdapter;
 import com.example.cs15fmk.foodmanagement.FoodCupboardItem;
+import com.example.cs15fmk.foodmanagement.InitialiseFoodCupboardArray;
+import com.example.cs15fmk.foodmanagement.InitialiseShoppingListArray;
 import com.example.cs15fmk.foodmanagement.R;
 import com.example.cs15fmk.foodmanagement.ViewFoodCupboardItem;
 
@@ -27,7 +30,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class FoodCupboardFragment extends Fragment {
 
-    private final ArrayList<FoodCupboardItem> cupboardItems = new ArrayList<>();
+    private ArrayList<FoodCupboardItem> foodCupboardItems = new ArrayList<>();
     private CupboardItemAdapter adapter;
     private GridView gridView;
     private Spinner spinner;
@@ -41,20 +44,9 @@ public class FoodCupboardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_food_cupboard, container, false);
         activity = getActivity();
 
-        cupboardItems.add(new FoodCupboardItem("Chicken", "31/01/2017", "07/02/2017", "8", "AMOUNT", "1", "1", "400", "300"));
-        cupboardItems.add(new FoodCupboardItem("Bread", "21/01/2017", "08/02/2017", "6", "QUANTITY", "12", "6","0", "0"));
-        cupboardItems.add(new FoodCupboardItem("Cereal", "11/01/2017", "09/02/2017", "30", "AMOUNT", "1","1", "750", "50"));
-        cupboardItems.add(new FoodCupboardItem("Beef", "01/01/2017", "27/02/2017", "5", "QUANTITY&AMOUNT", "3","1","1000","450"));
-        cupboardItems.add(new FoodCupboardItem("Milk", "05/01/2017", "10/03/2017", "5", "AMOUNT", "1","1","2000", "500"));
-        cupboardItems.add(new FoodCupboardItem("Wholemeal Rolls", "15/12/2016", "15/03/2017", "2","QUANTITY","4","2","0","0"));
-        cupboardItems.add(new FoodCupboardItem("Turkey rashers", "11/01/2017", "26/02/2017", "14", "AMOUNT", "1", "1","8","2"));
-        cupboardItems.add(new FoodCupboardItem("Eggs", "18/02/2017", "01/03/2017", "16", "QUANTITY&AMOUNT", "2", "2", "12", "6"));
-        cupboardItems.add(new FoodCupboardItem("Beef", "01/01/2017", "28/02/2017", "5", "QUANTITY&AMOUNT", "3","1","1000","450"));
-        cupboardItems.add(new FoodCupboardItem("Milk", "01/01/2017", "24/02/2017", "5", "AMOUNT", "1","1","2000", "500"));
-        cupboardItems.add(new FoodCupboardItem("Wholemeal Rolls", "23/01/2017", "03/03/2017", "2","QUANTITY","4","2","0","0"));
-        cupboardItems.add(new FoodCupboardItem("Turkey rashers", "07/02/2017", "10/03/2017", "14", "AMOUNT", "1", "1","8","2"));
+        foodCupboardItems = InitialiseFoodCupboardArray.getArray();
 
-        adapter = new CupboardItemAdapter (activity, cupboardItems);
+        adapter = new CupboardItemAdapter (activity, foodCupboardItems);
         gridView = (GridView) view.findViewById(R.id.grid_cupboard);
         gridView.setAdapter(adapter);
 
@@ -86,7 +78,7 @@ public class FoodCupboardFragment extends Fragment {
 
     public void viewCupboardItemEntry(int position)
     {
-        FoodCupboardItem item = cupboardItems.get(position);
+        FoodCupboardItem item = foodCupboardItems.get(position);
         Intent intent = new Intent(activity, ViewFoodCupboardItem.class);
         intent.putExtra("POSITION", String.valueOf(position));
         intent.putExtra("viewFoodCupboardItem", item);
@@ -110,25 +102,27 @@ public class FoodCupboardFragment extends Fragment {
                 if (data.getStringExtra("Edit").equals("yes"))
                 {
                     FoodCupboardItem editedItem = data.getParcelableExtra("updatedItem");
-                    cupboardItems.set(pos, editedItem);
+                    foodCupboardItems.set(pos, editedItem);
                     adapter.notifyDataSetChanged();
-                    Toast.makeText(activity, "You have just updated " + cupboardItems.get(pos).getName(), Toast.LENGTH_SHORT).show();
+                    editMasterList();
+                    Toast.makeText(activity, "You have just updated " + foodCupboardItems.get(pos).getName(), Toast.LENGTH_SHORT).show();
 
                     //COMPLETE NEXT!
                     //edit functionality, also need to beware finish functionality could set position as specific text e.g. none, edit to indicate intention
-                    /* cupboardItems.get(pos).setName(data.getStringExtra("updatedName"));
-                    cupboardItems.get(pos).setDayBought(data.getStringExtra("updatedDayBought"));
-                    cupboardItems.get(pos).setDayExpiry(data.getStringExtra("updatedDayExpiry"));
-                    cupboardItems.get(pos).setAmountBought(Integer.valueOf(data.getStringExtra("updatedAmountBought")));
-                    cupboardItems.get(pos).setAmountRemanining(Integer.valueOf(data.getStringExtra("updatedAmountRemaining")));
+                    /* foodCupboardItems.get(pos).setName(data.getStringExtra("updatedName"));
+                    foodCupboardItems.get(pos).setDayBought(data.getStringExtra("updatedDayBought"));
+                    foodCupboardItems.get(pos).setDayExpiry(data.getStringExtra("updatedDayExpiry"));
+                    foodCupboardItems.get(pos).setAmountBought(Integer.valueOf(data.getStringExtra("updatedAmountBought")));
+                    foodCupboardItems.get(pos).setAmountRemanining(Integer.valueOf(data.getStringExtra("updatedAmountRemaining")));
                      */
                 }
 
                 else
                 {
-                    Toast.makeText(activity, "You have just deleted " + cupboardItems.get(pos).getName(), Toast.LENGTH_SHORT).show();
-                    cupboardItems.remove(pos);
+                    Toast.makeText(activity, "You have just deleted " + foodCupboardItems.get(pos).getName(), Toast.LENGTH_SHORT).show();
+                    foodCupboardItems.remove(pos);
                     adapter.notifyDataSetChanged(); //deletion does not change anything permanently if you exit the screen
+                    editMasterList();
                 }
             }
         }
@@ -139,10 +133,20 @@ public class FoodCupboardFragment extends Fragment {
             if (resultCode == RESULT_OK)
             {
                 FoodCupboardItem newItem = data.getParcelableExtra("returnNewItem");
-                cupboardItems.add(newItem);
+                foodCupboardItems.add(newItem);
                 adapter.notifyDataSetChanged();
+                editMasterList();
             }
         }
+    }
+    private void editMasterList()
+    {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                InitialiseFoodCupboardArray.updateArray(foodCupboardItems);
+            }
+        });
     }
 
 }

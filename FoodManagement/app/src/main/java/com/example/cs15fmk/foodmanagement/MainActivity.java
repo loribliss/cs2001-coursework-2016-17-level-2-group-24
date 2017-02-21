@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void run() {
                 InitialiseShoppingListArray.initialiseArray();
+                InitialiseFoodCupboardArray.initialiseArray();
             }
         });
 

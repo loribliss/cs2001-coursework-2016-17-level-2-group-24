@@ -16,7 +16,6 @@ public class InitialiseShoppingListArray
 
     public static ArrayList<ShoppingListItem> getArray()
     {
-
         return masterListShoppingItems;
     }
 
