@@ -36,7 +36,7 @@ public class FoodCupboardFragment extends Fragment {
     private Spinner spinner;
     private Activity activity;
 
-    private static final String[]paths = {"Filter", "item 1", "item 2", "item 3"}; //first item is displayed!
+    private static final String[]paths = {"All", "Alphabetical", "Days Left", "item 3"}; //first item is displayed!
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,19 +50,45 @@ public class FoodCupboardFragment extends Fragment {
         gridView = (GridView) view.findViewById(R.id.grid_cupboard);
         gridView.setAdapter(adapter);
 
-        spinner = (Spinner)view.findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity,
-                android.R.layout.simple_spinner_item,paths);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 viewCupboardItemEntry(position);
             }
         });
+
+
+        spinner = (Spinner)view.findViewById(R.id.spinner);
+        ArrayAdapter<String> adapterSpinner = new ArrayAdapter<String>(activity,
+                android.R.layout.simple_spinner_item,paths);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapterSpinner);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                if (position == 1)
+                {
+                    Toast.makeText(activity, "You have just selected " + paths[position], Toast.LENGTH_SHORT).show();
+                }
+                else if (position ==2)
+                {
+                    Toast.makeText(activity, "You have just selected " + paths[position], Toast.LENGTH_SHORT).show();
+                }
+                else if (position ==3)
+                {
+                    Toast.makeText(activity, "You have just selected " + paths[position], Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
         Button addNewItem = (Button) view.findViewById(R.id.add_new_cupboard_item);
         addNewItem.setOnClickListener(new View.OnClickListener() {

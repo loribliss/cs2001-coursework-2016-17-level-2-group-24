@@ -13,24 +13,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/ran">
-
-        <SearchView
-            android:id="@+id/search_viewr"
-            android:layout_width="248dp"
-            android:layout_height="wrap_content"
-            android:iconifiedByDefault="false"
-            android:queryHint="search"/>
-        <RelativeLayout
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:text="Sort by:"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp"
+            android:textColor="@color/colourBlack"/>
             <Spinner
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/spinner"/>
-        </RelativeLayout>
-
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/spinner"
+                tools:text="sortby"/>
     </LinearLayout>
 
     <Button
