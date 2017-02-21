@@ -37,7 +37,7 @@ public class ShoppingListFragment extends Fragment {
     private ListView listView;
     private Activity activity;
     private Spinner spinner;
-    private static final String[]optionsShoppingListSpinner = {"All", "Alphabetical", "Quantity", "Priority"}; //ADD MOST RECENT
+    private static final String[]optionsShoppingListSpinner = {"All", "Alphabetical", "Quantity", "Priority", "Most Recent"}; //ADD MOST RECENT
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -112,6 +112,12 @@ public class ShoppingListFragment extends Fragment {
                 else if (position ==3)
                 {
                     shoppingItems = SortingAlgorithmsShoppingList.sortPriority(shoppingItems);
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(activity, "You have just selected " + optionsShoppingListSpinner[position], Toast.LENGTH_SHORT).show();
+                }
+                else if (position==4)
+                {
+                    shoppingItems = SortingAlgorithmsShoppingList.sortMostRecent(shoppingItems);
                     adapter.notifyDataSetChanged();
                     Toast.makeText(activity, "You have just selected " + optionsShoppingListSpinner[position], Toast.LENGTH_SHORT).show();
                 }

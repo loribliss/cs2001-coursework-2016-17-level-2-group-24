@@ -37,6 +37,13 @@ public class ShoppingListItem implements Parcelable{
         return priority;
     }
     public String getItemDateCreated() {return dateCreated;}
+    public int getIntItemDateCreated() //need to use long millisecond value instead for accuracy
+    {
+        int date = 0;
+        String tempDateNoSlashes = dateCreated.substring(0, 2) + dateCreated.substring(3, 5) + dateCreated.substring(6, dateCreated.length());;
+        date = Integer.valueOf(tempDateNoSlashes);
+        return date;
+    }
     public boolean getItemCheckBoxState() { return checkboxState;}
 
     public void setItemName(String setName)
