@@ -70,7 +70,7 @@ public class FoodCupboardFragment extends Fragment {
             {
                 if (position == 0)
                 {
-                    //all functionality
+                    //all functionality - default
                 }
                 if (position == 1)
                 {
