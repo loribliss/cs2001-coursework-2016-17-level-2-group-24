@@ -68,6 +68,10 @@ public class FoodCupboardFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
+                if (position == 0)
+                {
+                    //all functionality
+                }
                 if (position == 1)
                 {
                     Toast.makeText(activity, "You have just selected " + paths[position], Toast.LENGTH_SHORT).show();
