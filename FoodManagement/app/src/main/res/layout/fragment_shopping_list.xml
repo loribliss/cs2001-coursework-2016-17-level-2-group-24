@@ -47,21 +47,24 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Name:"
-                android:textColor="@color/colourBlack"/>
+                android:textColor="@color/colourBlack"
+                android:textStyle="bold"/>
             <TextView
                 android:translationX="35dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Quantity:"
-                android:textColor="@color/colourBlack"/>
+                android:textColor="@color/colourBlack"
+                android:textStyle="bold"/>
             <TextView
                 android:translationX="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Priority:"
-                android:textColor="@color/colourBlack"/>
+                android:textColor="@color/colourBlack"
+                android:textStyle="bold"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -69,7 +72,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="60dp"
         android:id="@+id/shoppinglist"
         android:orientation="vertical"
         android:paddingBottom="65dp"
