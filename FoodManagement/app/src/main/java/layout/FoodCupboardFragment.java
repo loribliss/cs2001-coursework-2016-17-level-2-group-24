@@ -60,7 +60,7 @@ public class FoodCupboardFragment extends Fragment {
         spinner = (Spinner)view.findViewById(R.id.spinner);
         ArrayAdapter<String> adapterSpinner = new ArrayAdapter<String>(activity,
                 android.R.layout.simple_spinner_item,paths);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapterSpinner);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

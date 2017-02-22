@@ -95,7 +95,7 @@ public class ShoppingListFragment extends Fragment {
         spinner = (Spinner) view.findViewById(R.id.sortByShoppingListSpinner);
         ArrayAdapter<String> adapterSpinner = new ArrayAdapter<String>(activity,
                 android.R.layout.simple_spinner_item,optionsShoppingListSpinner);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); //wrong adapter was being used
         spinner.setAdapter(adapterSpinner);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
