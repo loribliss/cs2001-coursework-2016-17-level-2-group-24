@@ -51,6 +51,8 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     compile project(':mysql-connector-java-5.1.40-bin')
+
+    compile 'com.google.android.gms:play-services-vision:9.8.0'
 }
 
 

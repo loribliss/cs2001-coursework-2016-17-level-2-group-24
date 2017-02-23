@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class AddNewFCItemMenu extends AppCompatActivity {
 
@@ -28,9 +29,11 @@ public class AddNewFCItemMenu extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-
+                //Intent intent = new Intent(AddNewFCItemMenu.this, OCReader.class);
+                //startActivityForResult(intent, 2);
             }
         } );
+
         Button addItemScan = (Button) findViewById(R.id.add_FC_scan);
         addItemPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +58,14 @@ public class AddNewFCItemMenu extends AppCompatActivity {
                 //datas.putExtra("newFCAmountBought",data.getStringExtra("new_FC_AmountBought"));
                 setResult(RESULT_OK, datas);
                 finish();
-
+            }
+        }
+        if (requestCode == 2)
+        {
+            if (resultCode == RESULT_OK)
+            {
+                TextView testView = (TextView)findViewById(R.id.test);
+                testView.setText(data.getStringExtra("text"));
             }
         }
     }
